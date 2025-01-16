@@ -1,6 +1,7 @@
 package com.mon.aichat.mapper;
 
 import com.mon.aichat.model.body.DepartmentBody;
+import com.mon.aichat.model.entity.DepartmentEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface DepartmentMapper {
 
     int onInsert(@Param("body") DepartmentBody body);
 
-    List<String> onQuery(@Param("cId") int cId);
+    List<DepartmentEntity> onQuery(@Param("cId") int cId);
 
     int onDelete(@Param("id") int id);
 

@@ -20,7 +20,7 @@ public class DepartmentController {
     DepartmentService service;
 
     //
-    @RequestMapping(value = "add", method = RequestMethod.GET)
+    @RequestMapping(value = "add", method = RequestMethod.POST)
     public ResultBody create(@RequestBody() DepartmentBody body) throws Exception {
         return ResultBody.success(service.add(body));
     }
@@ -39,6 +39,22 @@ public class DepartmentController {
     @RequestMapping(value = "count", method = RequestMethod.GET)
     public ResultBody count(@RequestParam("cId") Integer cId) throws Exception {
         return ResultBody.success(service.count(cId));
+    }
+
+    /**
+     * 更新
+     */
+    @RequestMapping(value = "update", method = RequestMethod.PUT)
+    public ResultBody update(@RequestBody() DepartmentBody body) throws Exception {
+        return ResultBody.success(service.update(body));
+    }
+
+    /**
+     * 删除
+     */
+    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    public ResultBody delete(@RequestParam("id") Integer id) throws Exception {
+        return ResultBody.success(service.delete(id));
     }
 
     /**
@@ -72,21 +88,5 @@ public class DepartmentController {
     @RequestMapping(value = "moveEmployee", method = RequestMethod.POST)
     public ResultBody moveEmployee(@RequestBody EmployeeBody body) throws Exception {
         return ResultBody.success(service.moveStaff(body));
-    }
-
-    /**
-     * 更新
-     */
-    @RequestMapping(value = "update", method = RequestMethod.PUT)
-    public ResultBody update(@RequestBody() DepartmentBody body) throws Exception {
-        return ResultBody.success(service.update(body));
-    }
-
-    /**
-     * 删除
-     */
-    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
-    public ResultBody delete(@RequestParam("id") Integer id) throws Exception {
-        return ResultBody.success(service.delete(id));
     }
 }

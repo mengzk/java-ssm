@@ -3,6 +3,7 @@ package com.mon.aichat.service;
 import com.mon.aichat.mapper.DepartmentMapper;
 import com.mon.aichat.model.body.DepartmentBody;
 import com.mon.aichat.model.body.EmployeeBody;
+import com.mon.aichat.model.entity.DepartmentEntity;
 import com.mon.aichat.modules.exception.AppException;
 import com.mon.aichat.modules.exception.CommonError;
 import com.mon.aichat.modules.exception.CustomException;
@@ -27,7 +28,7 @@ public class DepartmentService {
     }
 
     //
-    public List<String> query(Integer cId) throws AppException {
+    public List<DepartmentEntity> query(Integer cId) throws AppException {
         return mapper.onQuery(cId);
     }
 

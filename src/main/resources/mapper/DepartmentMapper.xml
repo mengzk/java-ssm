@@ -15,7 +15,7 @@
         <result property="level" javaType="Integer" column="level"/>
     </resultMap>
 
-    <cache/>
+<!--    <cache/>-->
 
     <insert id="onInsert">
         INSERT INTO department (name, description, parent_id, manager_id, company_id, level)
