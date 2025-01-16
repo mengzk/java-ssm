@@ -1,7 +1,10 @@
 package com.mon.aichat.mapper;
 
 import com.mon.aichat.model.body.EmployeeBody;
+import com.mon.aichat.model.entity.EmployeeEntity;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * Author: Meng
@@ -10,11 +13,15 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface EmployeeMapper {
 
-    int onQuery(@Param("cId") int cId, @Param("dId") int dId);
+    List<EmployeeEntity> onQuery(@Param("cId") Integer cId, @Param("dId") Integer dId);
 
-    int onInsert(@Param("body") EmployeeBody body, @Param("memo") String memo);
+    int onInsert(@Param("ids") List<EmployeeBody.ItemUser> list,
+                 @Param("memo") String memo,
+                 @Param("auth") String auth,
+                 @Param("cId") int cId,
+                 @Param("dId") int dId);
 
-    int onDelete(@Param("body") EmployeeBody body);
+    int onDelete(@Param("list") List<Integer> list, @Param("dId") int dId);
 
-    int onMove(@Param("body") EmployeeBody body);
+    int onMove(@Param("list") List<Integer> list, @Param("dId") int dId);
 }

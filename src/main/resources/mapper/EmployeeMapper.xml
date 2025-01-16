@@ -3,26 +3,29 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mon.aichat.mapper.EmployeeMapper">
     <!-- 配置 查询结果的列明和实体类的属性名的对应关系; -->
-    <resultMap id="departMap" type="com.mon.aichat.model.entity.EmployeeEntity">
+    <resultMap id="employMap" type="com.mon.aichat.model.entity.EmployeeEntity">
         <!--主键字段的对应 -->
         <id property="id" javaType="Integer" column="id"/>
         <!--非主键字段的对应-->
         <result property="uid" javaType="Integer" column="uid"/>
-        <result property="status" javaType="String" column="status"/>
+        <result property="status" javaType="Integer" column="status"/>
         <result property="companyId" javaType="Integer" column="company_id"/>
         <result property="departmentId" javaType="Integer" column="department_id"/>
+        <result property="name" javaType="String" column="name"/>
         <result property="memo" javaType="String" column="memo"/>
         <result property="auth" javaType="String" column="auth"/>
-        <result property="createTime" javaType="String" column="create_time"/>
-        <result property="updateTime" javaType="String" column="update_time"/>
+        <result property="createTime" javaType="Date" column="create_time"/>
+        <result property="updateTime" javaType="Date" column="update_time"/>
     </resultMap>
 
     <cache/>
 
     <insert id="onInsert">
-        INSERT INTO employee (uid, status, company_id, department_id, memo, auth, create_time, update_time)
+        INSERT INTO employee (uid, name, status, company_id, department_id, memo, auth, create_time, update_time)
         VALUES
-        (#{body.uid},0,#{body.companyId},#{body.departmentId},#{memo},'',NOW(),NOW());
+        <foreach collection="ids" item="user" separator=",">
+            (#{user.id},#{user.name},0,#{cId},#{dId},#{memo},#{auth},NOW(),NOW())
+        </foreach>
     </insert>
 
     <update id="onUpdate">
@@ -47,12 +50,12 @@
         WHERE id=#{body.id};
     </update>
 
-    <select id="onQuery" resultMap="departMap">
+    <select id="onQuery" resultMap="employMap">
         SELECT * FROM employee
-        <where>
-            <if test="cId != null">company_id=#{cId}</if>
-            <if test="dId != null">department_id=#{dId}</if>
-        </where>
+<!--        <where>-->
+<!--            <if test="cId != null">company_id=#{cId}</if>-->
+<!--            <if test="dId != null">AND department_id=#{dId}</if>-->
+<!--        </where>-->
     </select>
 
     <select id="onCount" resultType="int">

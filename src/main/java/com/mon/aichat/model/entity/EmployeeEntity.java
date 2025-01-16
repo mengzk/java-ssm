@@ -1,5 +1,7 @@
 package com.mon.aichat.model.entity;
 
+import java.util.Date;
+
 /**
  * Author: Meng
  * Date: 2025-01-16
@@ -8,11 +10,12 @@ package com.mon.aichat.model.entity;
 public class EmployeeEntity {
     public int id;
     public int uid;
-    public Integer departmentId;
-    public Integer companyId;
-    public Integer status;
+    public int departmentId;
+    public int companyId;
+    public int status;
     public String auth;
+    public String name;
     public String memo;
-    public String createTime;
-    public String updateTime;
+    public Date createTime;
+    public Date updateTime;
 }

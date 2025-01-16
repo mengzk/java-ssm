@@ -1,9 +1,11 @@
 package com.mon.aichat.service;
 
 import com.mon.aichat.mapper.DepartmentMapper;
+import com.mon.aichat.mapper.EmployeeMapper;
 import com.mon.aichat.model.body.DepartmentBody;
 import com.mon.aichat.model.body.EmployeeBody;
 import com.mon.aichat.model.entity.DepartmentEntity;
+import com.mon.aichat.model.entity.EmployeeEntity;
 import com.mon.aichat.modules.exception.AppException;
 import com.mon.aichat.modules.exception.CommonError;
 import com.mon.aichat.modules.exception.CustomException;
@@ -21,6 +23,9 @@ import java.util.List;
 public class DepartmentService {
     @Autowired
     DepartmentMapper mapper;
+
+    @Autowired
+    EmployeeMapper eMapper;
 
     //
     public int add(DepartmentBody body) throws AppException {
@@ -55,20 +60,21 @@ public class DepartmentService {
 
 
     //
-    public int queryStaff(Integer cId, Integer dId) throws AppException {
-        return 0;
+    public List<EmployeeEntity> queryStaff(Integer cId, Integer dId) throws AppException {
+//        System.out.println("cId: " + cId + ", dId: " + dId);
+        return eMapper.onQuery(cId, dId);
     }
 
     //
-    public int addStaff(EmployeeBody dId) throws AppException {
-        return 0;
+    public int addStaff(EmployeeBody body) throws AppException {
+        return eMapper.onInsert(body.list, body.memo, body.auth, body.companyId, body.departmentId);
     }
 
-    public int removeStaff(EmployeeBody dId) throws AppException {
-        return 0;
+    public int removeStaff(List<Integer> ids, Integer dId) throws AppException {
+        return eMapper.onDelete(ids, dId);
     }
 
-    public int moveStaff(EmployeeBody body) throws AppException {
-        return 0;
+    public int moveStaff(List<Integer> ids, Integer dId) throws AppException {
+        return eMapper.onMove(ids, dId);
     }
 }

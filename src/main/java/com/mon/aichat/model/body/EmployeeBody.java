@@ -10,5 +10,13 @@ import java.util.List;
 public class EmployeeBody {
     public Integer departmentId;
     public Integer companyId;
+    public String auth="";
+    public String memo="";
     public List<Integer> ids;
+    public List<ItemUser> list;
+
+    public static class ItemUser {
+        public Integer id;
+        public String name;
+    }
 }

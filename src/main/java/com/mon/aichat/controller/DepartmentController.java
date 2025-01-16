@@ -79,7 +79,7 @@ public class DepartmentController {
      */
     @RequestMapping(value = "removeEmployee", method = RequestMethod.POST)
     public ResultBody removeEmployee(@RequestBody EmployeeBody body) throws Exception {
-        return ResultBody.success(service.removeStaff(body));
+        return ResultBody.success(service.removeStaff(body.ids, body.departmentId));
     }
 
     /**
@@ -87,6 +87,6 @@ public class DepartmentController {
      */
     @RequestMapping(value = "moveEmployee", method = RequestMethod.POST)
     public ResultBody moveEmployee(@RequestBody EmployeeBody body) throws Exception {
-        return ResultBody.success(service.moveStaff(body));
+        return ResultBody.success(service.moveStaff(body.ids, body.departmentId));
     }
 }
