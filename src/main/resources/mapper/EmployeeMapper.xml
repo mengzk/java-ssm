@@ -18,7 +18,7 @@
         <result property="updateTime" javaType="Date" column="update_time"/>
     </resultMap>
 
-    <cache/>
+<!--    <cache/>-->
 
     <insert id="onInsert">
         INSERT INTO employee (uid, name, status, company_id, department_id, memo, auth, create_time, update_time)
@@ -52,10 +52,10 @@
 
     <select id="onQuery" resultMap="employMap">
         SELECT * FROM employee
-<!--        <where>-->
-<!--            <if test="cId != null">company_id=#{cId}</if>-->
-<!--            <if test="dId != null">AND department_id=#{dId}</if>-->
-<!--        </where>-->
+        <where>
+            <if test="cId != null">company_id=#{cId}</if>
+            <if test="dId != null">AND department_id=#{dId}</if>
+        </where>
     </select>
 
     <select id="onCount" resultType="int">
