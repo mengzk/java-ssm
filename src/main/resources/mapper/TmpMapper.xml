@@ -82,4 +82,23 @@
         LIMIT #{position}, #{size};
     </select>
 
+
+    <insert id="onInsert3">
+        INSERT INTO employee (uid, name, status, company_id, department_id, memo, auth, create_time, update_time)
+        VALUES
+        <foreach collection="users" item="user" separator=",">
+            (#{user.id},#{user.name},0,#{cId},#{dId},#{memo},#{auth},NOW(),NOW())
+        </foreach>
+    </insert>
+
+    <update id="onMove">
+        <foreach collection="list" item="id" separator=";">
+            UPDATE employee
+            <set>
+                <if test="dId != null">department_id=#{dId},</if>
+                update_time=NOW()
+            </set>
+            WHERE id=#{id}
+        </foreach>
+    </update>
 </mapper>

@@ -18,12 +18,12 @@
         <result property="updateTime" javaType="Date" column="update_time"/>
     </resultMap>
 
-<!--    <cache/>-->
+    <!--    <cache/>-->
 
     <insert id="onInsert">
         INSERT INTO employee (uid, name, status, company_id, department_id, memo, auth, create_time, update_time)
         VALUES
-        <foreach collection="ids" item="user" separator=",">
+        <foreach collection="users" item="user" separator=",">
             (#{user.id},#{user.name},0,#{cId},#{dId},#{memo},#{auth},NOW(),NOW())
         </foreach>
     </insert>
@@ -42,12 +42,14 @@
     </update>
 
     <update id="onMove">
-        UPDATE employee
-        <set>
-            <if test="body.departmentId != null">department_id=#{body.departmentId},</if>
-            <if test="body.updateTime != null">update_time=NOW(),</if>
-        </set>
-        WHERE id=#{body.id};
+        <foreach collection="list" item="id" separator=";">
+            UPDATE employee
+            <set>
+                <if test="dId != null">department_id=#{dId},</if>
+                update_time=NOW()
+            </set>
+            WHERE id=#{id}
+        </foreach>
     </update>
 
     <select id="onQuery" resultMap="employMap">

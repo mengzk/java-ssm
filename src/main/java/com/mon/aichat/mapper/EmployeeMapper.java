@@ -15,13 +15,13 @@ public interface EmployeeMapper {
 
     List<EmployeeEntity> onQuery(@Param("cId") Integer cId, @Param("dId") Integer dId);
 
-    int onInsert(@Param("ids") List<EmployeeBody.ItemUser> list,
+    int onInsert(@Param("users") List<EmployeeBody.ItemUser> list,
                  @Param("memo") String memo,
                  @Param("auth") String auth,
                  @Param("cId") int cId,
                  @Param("dId") int dId);
 
-    int onDelete(@Param("list") List<Integer> list, @Param("dId") int dId);
+    int onDelete(@Param("list") List<Integer> list, @Param("dId") Integer dId);
 
-    int onMove(@Param("list") List<Integer> list, @Param("dId") int dId);
+    int onMove(@Param("list") List<Integer> list, @Param("dId") Integer dId);
 }
