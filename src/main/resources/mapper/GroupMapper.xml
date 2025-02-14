@@ -7,7 +7,12 @@
         <!--主键字段的对应 -->
         <id property="id" javaType="Integer" column="id"/>
         <!--非主键字段的对应-->
-        <result property="createTime" javaType="Date" column="create_date"/>
+        <result property="status" javaType="Integer" column="status"/>
+        <result property="level" javaType="Integer" column="level"/>
+        <result property="name" javaType="String" column="name"/>
+        <result property="memo" javaType="String" column="memo"/>
+        <result column="manager_id" property="managerId" javaType="Integer"/>
+        <result property="createTime" javaType="Date" column="create_time"/>
     </resultMap>
 
     <cache/>

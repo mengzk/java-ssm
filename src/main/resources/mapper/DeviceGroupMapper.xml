@@ -12,7 +12,7 @@
         <result property="level" javaType="Integer" column="level"/>
         <result property="name" javaType="String" column="name"/>
         <result property="memo" javaType="String" column="memo"/>
-        <result property="createDate" javaType="Date" column="create_date"/>
+        <result property="createTime" javaType="Date" column="create_time"/>
     </resultMap>
 
     <select id="onQuery" resultMap="groupMap">

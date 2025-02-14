@@ -4,7 +4,7 @@
 <mapper namespace="com.mon.aichat.mapper.DeviceMapper">
 
     <!-- 配置 查询结果的列明和实体类的属性名的对应关系; -->
-    <resultMap id="deviceMap" type="com.mon.aichat.model.entity.DeviceEntity">
+    <resultMap id="deviceMap" type="com.mon.aichat.model.entity.ApprovalEntity">
         <!--主键字段的对应 -->
         <id property="id" javaType="Integer" column="id"/>
         <!--非主键字段的对应-->
