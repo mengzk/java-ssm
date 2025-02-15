@@ -8,7 +8,7 @@ import java.util.List;
  * Date: 2024-07-23
  * Desc: 任务
  */
-public interface TaskMapper {
+public interface RecordTaskMapper {
 
     List<String> onQuery(@Param("start") int start, @Param("size") int size);
 
