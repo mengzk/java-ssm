@@ -9,14 +9,11 @@ import java.util.Date;
  */
 public class TaskEntity {
     public int id;
-    public int gid;
-    public int uid;
-    public int price;
+    public int createUid;
     public int status;
-    public int level;
-    public int score;
-    public String sn;
-    public String name;
-    public String memo;
-    public Date createDate;
+    public int level; // 优先级
+    public String title;
+    public String content;
+    public String attachments; // 附件 传递路径或者id
+    public Date createTime;
 }

@@ -36,13 +36,13 @@
         update device_group
         <set>
             <if test="body.pid!=null">
-                pid = #{body.pid},
+                pid = #{body.pid}
             </if>
             <if test="body.level!=null">
-                level = #{body.level},
+                level = #{body.level}
             </if>
             <if test="body.name!=null and body.name!=''">
-                name = #{body.name},
+                name = #{body.name}
             </if>
             <if test="body.memo!=null and body.memo!=''">
                 memo = #{body.memo}

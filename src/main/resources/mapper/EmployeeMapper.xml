@@ -31,12 +31,12 @@
     <update id="onUpdate">
         UPDATE employee
         <set>
-            <if test="body.status != null">status=#{body.status},</if>
-            <if test="body.companyId != null">company_id=#{body.companyId},</if>
-            <if test="body.departmentId != null">department_id=#{body.departmentId},</if>
-            <if test="body.memo != null">memo=#{body.memo},</if>
-            <if test="body.auth != null">auth=#{body.auth},</if>
-            <if test="body.updateTime != null">update_time=NOW(),</if>
+            <if test="body.status != null">status=#{body.status}</if>
+            <if test="body.companyId != null">company_id=#{body.companyId}</if>
+            <if test="body.departmentId != null">department_id=#{body.departmentId}</if>
+            <if test="body.memo != null">memo=#{body.memo}</if>
+            <if test="body.auth != null">auth=#{body.auth}</if>
+            <if test="body.updateTime != null">update_time=NOW()</if>
         </set>
         WHERE id=#{body.id};
     </update>
@@ -45,7 +45,7 @@
         <foreach collection="list" item="id" separator=";">
             UPDATE employee
             <set>
-                <if test="dId != null">department_id=#{dId},</if>
+                <if test="dId != null">department_id=#{dId}</if>
                 update_time=NOW()
             </set>
             WHERE id=#{id}

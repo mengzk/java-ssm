@@ -4,41 +4,55 @@
 <mapper namespace="com.mon.aichat.mapper.DeviceMapper">
 
     <!-- 配置 查询结果的列明和实体类的属性名的对应关系; -->
-    <resultMap id="deviceMap" type="com.mon.aichat.model.entity.ApprovalEntity">
+    <resultMap id="deviceMap" type="com.mon.aichat.model.entity.TokenEntity">
         <!--主键字段的对应 -->
         <id property="id" javaType="Integer" column="id"/>
         <!--非主键字段的对应-->
-        <result property="gid" javaType="Integer" column="gid"/>
-        <result property="uid" javaType="Integer" column="uid"/>
+        <result property="createUid" javaType="Integer" column="create_uid"/>
         <result property="status" javaType="Integer" column="status"/>
-        <result property="price" javaType="Integer" column="price"/>
         <result property="level" javaType="Integer" column="level"/>
-        <result property="score" javaType="Integer" column="score"/>
-        <result property="sn" javaType="String" column="sn"/>
-        <result property="name" javaType="String" column="name"/>
-        <result property="memo" javaType="String" column="memo"/>
+        <result property="title" javaType="String" column="title"/>
+        <result property="content" javaType="String" column="content"/>
+        <result property="attachments" javaType="String" column="attachments"/>
         <result property="createTime" javaType="Date" column="create_time"/>
     </resultMap>
 
     <select id="onQuery" resultMap="deviceMap">
-        SELECT * FROM ac_device where device_type=1 limit #{start},#{size};
+        SELECT * FROM task
+        <where>
+            <if test="tag!=null">
+                tag = #{tag}
+            </if>
+            <if test="status!=null">
+                and status = #{status}
+            </if>
+        </where>
+        limit #{start},#{size};
     </select>
 
     <select id="onCount" resultType="int">
-        SELECT count(*) FROM ac_device;
+        SELECT count(*) FROM task
+        <where>
+            <if test="uid!=null">
+                uid = #{uid}
+            </if>
+            <if test="status!=null">
+                and status = #{status}
+            </if>
+        </where>
     </select>
 
     <select id="onHandle" resultType="int">
-        SELECT count(*) FROM ac_device where gid=#{gid};
+        SELECT count(*) FROM task where gid=#{gid};
     </select>
 
     <insert id="onInsert">
-        insert into ac_device (device_type,nickname,sn,memo,create_time) values
+        insert into task (device_type,nickname,sn,memo,create_time) values
         (#{body.deviceType},#{body.nickname},#{body.sn},#{body.memo},#{body.createTime});
     </insert>
 
     <update id="onUpdate">
-        update ac_device
+        update task
         <set>
             <if test="body.deviceType!=null">
                 device_type = #{body.deviceType},
@@ -57,6 +71,6 @@
     </update>
 
     <delete id="onDelete">
-        delete from ac_device where id = #{id};
+        delete from task where id = #{id};
     </delete>
 </mapper>

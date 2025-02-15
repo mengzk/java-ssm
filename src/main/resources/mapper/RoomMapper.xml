@@ -43,13 +43,13 @@
         update room
         <set>
             <if test="body.status!=null">
-                status = #{body.status},
+                status = #{body.status}
             </if>
             <if test="body.style!=null">
-                style = #{body.style},
+                style = #{body.style}
             </if>
             <if test="body.name!=null and body.name!=''">
-                name = #{body.name},
+                name = #{body.name}
             </if>
             <if test="body.memo!=null and body.memo!=''">
                 memo = #{body.memo}

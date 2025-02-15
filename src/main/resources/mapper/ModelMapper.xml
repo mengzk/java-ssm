@@ -27,13 +27,13 @@
         update ac_model
         <set>
             <if test="body.kid!=null">
-                kid = #{body.kid},
+                kid = #{body.kid}
             </if>
             <if test="body.name!=null">
-                name = #{body.name},
+                name = #{body.name}
             </if>
             <if test="body.memo!=null and body.memo!=''">
-                memo = #{body.memo},
+                memo = #{body.memo}
             </if>
         </set>
         where id = #{body.id};

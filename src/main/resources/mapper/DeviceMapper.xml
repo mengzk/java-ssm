@@ -45,16 +45,16 @@
         update ac_device
         <set>
             <if test="body.deviceType!=null">
-                device_type = #{body.deviceType},
+                device_type = #{body.deviceType}
             </if>
             <if test="body.nickname!=null">
-                nickname = #{body.nickname},
+                nickname = #{body.nickname}
             </if>
             <if test="body.sn!=null and body.sn!=''">
-                sn = #{body.sn},
+                sn = #{body.sn}
             </if>
             <if test="body.memo!=null and body.memo!=''">
-                memo = #{body.memo},
+                memo = #{body.memo}
             </if>
         </set>
         where id = #{body.id};

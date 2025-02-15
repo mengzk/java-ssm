@@ -30,14 +30,14 @@
     <update id="onUpdate">
         UPDATE company
         <set>
-            <if test="body.level != null">level=#{body.level},</if>
-            <if test="body.logo != null">logo=#{body.logo},</if>
-            <if test="body.name != null">name=#{body.name},</if>
-            <if test="body.description != null">description=#{body.description},</if>
-            <if test="body.address != null">address=#{body.address},</if>
-            <if test="body.lat != null">lat=#{body.lat},</if>
-            <if test="body.lng != null">lng=#{body.lng},</if>
-            <if test="body.uid != null">uid=#{body.uid},</if>
+            <if test="body.level != null">level=#{body.level}</if>
+            <if test="body.logo != null">logo=#{body.logo}</if>
+            <if test="body.name != null">name=#{body.name}</if>
+            <if test="body.description != null">description=#{body.description}</if>
+            <if test="body.address != null">address=#{body.address}</if>
+            <if test="body.lat != null">lat=#{body.lat}</if>
+            <if test="body.lng != null">lng=#{body.lng}</if>
+            <if test="body.uid != null">uid=#{body.uid}</if>
         </set>
         WHERE id=#{body.id};
     </update>
@@ -48,9 +48,9 @@
             <if test="level!=null">
                 level = #{level}
             </if>
-<!--            <if test="key != null">-->
-<!--                AND name LIKE CONCAT('%', #{key}, '%')-->
-<!--            </if>-->
+            <!--            <if test="key != null">-->
+            <!--                AND name LIKE CONCAT('%', #{key}, '%')-->
+            <!--            </if>-->
         </where>
         limit #{position},#{size};
     </select>

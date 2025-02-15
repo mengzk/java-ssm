@@ -66,22 +66,22 @@
         update booking
         <set>
             <if test="body.tag!=null">
-                tag = #{body.tag},
+                tag = #{body.tag}
             </if>
             <if test="body.start!=null">
-                start = #{body.start},
+                start = #{body.start}
             </if>
             <if test="body.end!=null">
-                end = #{body.end},
+                end = #{body.end}
             </if>
             <if test="body.time!=null">
-                time = #{body.time},
+                time = #{body.time}
             </if>
             <if test="body.theme!=null">
-                theme = #{body.theme},
+                theme = #{body.theme}
             </if>
             <if test="body.content!=null">
-                content = #{body.content},
+                content = #{body.content}
             </if>
             <if test="body.memo!=null">
                 memo = #{body.memo}

@@ -29,16 +29,16 @@
         SELECT * FROM account
         <where>
             <if test="body.phone!=null and body.phone!=''">
-                phone=#{body.phone};
+                phone=#{body.phone}
             </if>
             <if test="body.uid!=null and body.uid!=''">
-                or uid=#{body.uid};
+                or uid=#{body.uid}
             </if>
             <if test="body.email!=null and body.email!=''">
-                or email=#{body.email};
+                or email=#{body.email}
             </if>
             <if test="body.sign!=null and body.sign!=''">
-                or sign=#{body.sign};
+                or sign=#{body.sign}
             </if>
         </where>
     </select>
@@ -46,10 +46,10 @@
     <select id="query" resultType="int">
         SELECT id FROM account where
         <if test="body.phone!=null and body.phone!=''">
-            phone = #{body.phone};
+            phone = #{body.phone}
         </if>
         <if test="body.email!=null and body.email!=''">
-            email = #{body.email};
+            email = #{body.email}
         </if>
     </select>
 
@@ -68,7 +68,7 @@
     <insert id="register" parameterType="com.mon.aichat.model.body.AccountBody" useGeneratedKeys="true"
             keyProperty="id">
         insert into account (uid,pwd,sign,phone,email,icon,nickname,create_time) values
-        (#{user.uid},#{user.pwd},#{user.sign},#{user.phone},#{user.email},#{user.icon},#{user.nickname},#{user.createTime});
+        (#{user.uid},#{user.pwd},#{user.sign},#{user.phone},#{user.email},#{user.icon},#{user.nickname},#{user.createTime})
         <selectKey keyProperty="id" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>
@@ -78,10 +78,10 @@
         update account
         <set>
             <if test="body.pwd!=null">
-                pwd = #{body.pwd},
+                pwd = #{body.pwd}
             </if>
             <if test="body.nickname!=null">
-                nickname = #{body.nickname},
+                nickname = #{body.nickname}
             </if>
         </set>
         where id = #{body.id};

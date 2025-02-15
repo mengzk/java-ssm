@@ -26,12 +26,12 @@
     <update id="onUpdate">
         UPDATE department
         <set>
-            <if test="body.name != null">name=#{body.name},</if>
-            <if test="body.description != null">description=#{body.description},</if>
-            <if test="body.parentId != null">parent_id=#{body.parentId},</if>
-            <if test="body.managerId != null">manager_id=#{body.managerId},</if>
-            <if test="body.companyId != null">company_id=#{body.companyId},</if>
-            <if test="body.level != null">level=#{body.level},</if>
+            <if test="body.name != null">name=#{body.name}</if>
+            <if test="body.description != null">description=#{body.description}</if>
+            <if test="body.parentId != null">parent_id=#{body.parentId}</if>
+            <if test="body.managerId != null">manager_id=#{body.managerId}</if>
+            <if test="body.companyId != null">company_id=#{body.companyId}</if>
+            <if test="body.level != null">level=#{body.level}</if>
         </set>
         WHERE id=#{body.id};
     </update>
