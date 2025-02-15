@@ -16,4 +16,5 @@ public class TaskEntity {
     public String content;
     public String attachments; // 附件 传递路径或者id
     public Date createTime;
+    public Date updateTime;
 }

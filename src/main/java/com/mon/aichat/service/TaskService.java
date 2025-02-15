@@ -7,6 +7,7 @@ import com.mon.aichat.model.body.TaskHandleBody;
 import com.mon.aichat.model.dto.Device;
 import com.mon.aichat.model.result.ResultList;
 import com.mon.aichat.modules.exception.AppException;
+import com.mon.aichat.modules.exception.CommonError;
 import com.mon.aichat.modules.exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,12 @@ public class TaskService {
     // 更新
     public int update(TaskBody body) throws AppException {
         if (body.id == null) {
-            throw CustomException.create(10011, "ID不能为空");
+            throw CustomException.create(CommonError.PARAM_EMPTY);
+        } else {
+            // 审批中的任务不能修改
+            if (mapper.onDetail(body.id).status == 1) {
+                throw CustomException.create(10011, "审批中的任务不能修改");
+            }
         }
         mapper.onUpdate("body");
         return 0;
@@ -64,7 +70,7 @@ public class TaskService {
     // 处理
     public int handle(TaskHandleBody body) throws AppException {
         if (body.id == null) {
-            throw CustomException.create(10011, "ID不能为空");
+            throw CustomException.create(CommonError.PARAM_EMPTY);
         }else if (body.uid == null) {
             throw CustomException.create(10011, "操作人不能为空");
         }else if (body.status == null) {
@@ -72,9 +78,9 @@ public class TaskService {
         }
         // 如果是拒绝，需要填写原因
 
-        // 添加审批记录
-
         // 更新任务状态
+
+        // 更新状态成功后，添加审批记录
         return 0;
     }
 }

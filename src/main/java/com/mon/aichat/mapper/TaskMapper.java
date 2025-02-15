@@ -1,5 +1,6 @@
 package com.mon.aichat.mapper;
 
+import com.mon.aichat.model.entity.TaskEntity;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -13,6 +14,8 @@ public interface TaskMapper {
     List<String> onQuery(@Param("start") int start, @Param("size") int size);
 
     int onCount(@Param("id") int id);
+
+    TaskEntity onDetail(@Param("id") int id);
 
     int onInsert(@Param("uid") int uid, @Param("status") int status);
 

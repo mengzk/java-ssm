@@ -68,7 +68,7 @@
     <insert id="register" parameterType="com.mon.aichat.model.body.AccountBody" useGeneratedKeys="true"
             keyProperty="id">
         insert into account (uid,pwd,sign,phone,email,icon,nickname,create_time) values
-        (#{user.uid},#{user.pwd},#{user.sign},#{user.phone},#{user.email},#{user.icon},#{user.nickname},#{user.createTime})
+        (#{user.uid},#{user.pwd},#{user.sign},#{user.phone},#{user.email},#{user.icon},#{user.nickname},NOW())
         <selectKey keyProperty="id" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>

@@ -1,4 +1,5 @@
 package com.mon.aichat.model.entity;
+
 /**
  * Author: Meng
  * Date: 2024-12-19

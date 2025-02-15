@@ -13,7 +13,7 @@
     <cache/>
 
     <insert id="onInsert">
-        INSERT INTO token (userId, value) VALUES (#{id},#{value});
+        INSERT INTO token (userId, value,create_time) VALUES (#{id},#{value},NOW());
     </insert>
 
     <update id="onUpdate">
