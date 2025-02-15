@@ -1,9 +1,8 @@
 package com.mon.aichat.controller;
 
-import com.mon.aichat.model.body.ApprovalBody;
 import com.mon.aichat.model.body.TaskBody;
+import com.mon.aichat.model.body.TaskHandleBody;
 import com.mon.aichat.model.result.ResultBody;
-import com.mon.aichat.service.ApprovalService;
 import com.mon.aichat.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -58,8 +57,8 @@ public class TaskController {
      * 0: 待审批, 1: 通过, 2: 拒绝
      */
     @RequestMapping(value = "handle", method = RequestMethod.PUT)
-    public ResultBody onHandle(@RequestParam("id") Integer id, @RequestParam("status") Integer status) throws Exception {
-        return ResultBody.success(service.handle(id, status));
+    public ResultBody onHandle(@RequestBody() TaskHandleBody body) throws Exception {
+        return ResultBody.success(service.handle(body));
     }
 
     /**

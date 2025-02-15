@@ -1,10 +1,9 @@
 package com.mon.aichat.service;
 
-import com.mon.aichat.mapper.ApprovalMapper;
 import com.mon.aichat.mapper.RecordTaskMapper;
 import com.mon.aichat.mapper.TaskMapper;
-import com.mon.aichat.model.body.ApprovalBody;
 import com.mon.aichat.model.body.TaskBody;
+import com.mon.aichat.model.body.TaskHandleBody;
 import com.mon.aichat.model.dto.Device;
 import com.mon.aichat.model.result.ResultList;
 import com.mon.aichat.modules.exception.AppException;
@@ -22,9 +21,7 @@ import org.springframework.stereotype.Service;
 public class TaskService {
     @Autowired
     TaskMapper mapper;
-    @Autowired
-    ApprovalMapper approvalMapper;
-//    @Autowired RecordTaskMapper recordTaskMapper;
+    @Autowired RecordTaskMapper recordMapper;
 
     // 添加
     public int create(TaskBody body) throws AppException {
@@ -41,7 +38,7 @@ public class TaskService {
     // 详情
     public Device detail(Integer id) throws AppException {
         if (id == null) {
-            throw CustomException.create(10011, "设备ID不能为空");
+            throw CustomException.create(10011, "ID不能为空");
         }
         return null;
     }
@@ -49,7 +46,7 @@ public class TaskService {
     // 删除
     public int delete(Integer id) throws AppException {
         if (id == null) {
-            throw CustomException.create(10011, "设备ID不能为空");
+            throw CustomException.create(10011, "ID不能为空");
         }
         mapper.onDelete(id);
         return 0;
@@ -58,20 +55,26 @@ public class TaskService {
     // 更新
     public int update(TaskBody body) throws AppException {
         if (body.id == null) {
-            throw CustomException.create(10011, "设备ID不能为空");
+            throw CustomException.create(10011, "ID不能为空");
         }
         mapper.onUpdate("body");
         return 0;
     }
 
     // 处理
-    public int handle(Integer id, Integer status) throws AppException {
-        if (id == null) {
-            throw CustomException.create(10011, "设备ID不能为空");
+    public int handle(TaskHandleBody body) throws AppException {
+        if (body.id == null) {
+            throw CustomException.create(10011, "ID不能为空");
+        }else if (body.uid == null) {
+            throw CustomException.create(10011, "操作人不能为空");
+        }else if (body.status == null) {
+            throw CustomException.create(10011, "处理不能为空");
         }
-        if (status == null) {
-            throw CustomException.create(10011, "设备状态不能为空");
-        }
+        // 如果是拒绝，需要填写原因
+
+        // 添加审批记录
+
+        // 更新任务状态
         return 0;
     }
 }
