@@ -12,6 +12,7 @@ public class TaskBody {
     public Integer uid;
     public Integer status;
     public int level; // 优先级
+    public int type3; // 类型
     public String title;
     public String content;
     public String reason;

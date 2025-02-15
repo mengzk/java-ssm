@@ -12,6 +12,7 @@ public class TaskEntity {
     public int createUid;
     public int status;
     public int level; // 优先级
+    public int type3; // 类型
     public String title;
     public String content;
     public String attachments; // 附件 传递路径或者id

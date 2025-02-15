@@ -11,6 +11,7 @@
         <result property="createUid" javaType="Integer" column="create_uid"/>
         <result property="status" javaType="Integer" column="status"/>
         <result property="level" javaType="Integer" column="level"/>
+        <result property="type3" javaType="Integer" column="type3"/>
         <result property="title" javaType="String" column="title"/>
         <result property="content" javaType="String" column="content"/>
         <result property="attachments" javaType="String" column="attachments"/>
@@ -18,15 +19,18 @@
         <result property="createTime" javaType="Date" column="create_time"/>
     </resultMap>
 
-
     <select id="onDetail" resultMap="taskMap">
         SELECT * FROM task where id=#{id};
     </select>
+
     <select id="onQuery" resultMap="taskMap">
         SELECT * FROM task
         <where>
-            <if test="tag!=null">
-                tag = #{tag}
+            <if test="type3!=null">
+                type3 = #{type3}
+            </if>
+            <if test="uid!=null">
+                and create_uid = #{uid}
             </if>
             <if test="status!=null">
                 and status = #{status}
@@ -55,16 +59,19 @@
     <update id="onUpdate">
         UPDATE task
         <set>
-            <if test="body.title!=null">
+            <if test="body.title!=null and body.level!=''">
                 title = #{body.title}
             </if>
             <if test="body.content!=null">
                 content = #{body.content}
             </if>
-            <if test="body.level!=null and body.level!=''">
+            <if test="body.level!=null">
                 level = #{body.level}
             </if>
-            <if test="body.status!=null and body.status!=''">
+            <if test="body.type3!=null">
+                type3 = #{body.type3}
+            </if>
+            <if test="body.status!=null">
                 status = #{body.status}
             </if>
             <if test="body.attachments!=null and body.attachments!=''">
