@@ -1,9 +1,9 @@
 package com.mon.aichat.utils;
 
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
+//import com.itextpdf.kernel.pdf.PdfDocument;
+//import com.itextpdf.kernel.pdf.PdfWriter;
+//import com.itextpdf.layout.Document;
+//import com.itextpdf.layout.element.Paragraph;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,12 +28,12 @@ public class PDFUtil {
 
     public static byte[] create(String content) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        PdfWriter writer = new PdfWriter(byteArrayOutputStream);
-        PdfDocument pdfDoc = new PdfDocument(writer);
-        Document document = new Document(pdfDoc);
-
-        document.add(new Paragraph(content));
-        document.close();
+//        PdfWriter writer = new PdfWriter(byteArrayOutputStream);
+//        PdfDocument pdfDoc = new PdfDocument(writer);
+//        Document document = new Document(pdfDoc);
+//
+//        document.add(new Paragraph(content));
+//        document.close();
 
         return byteArrayOutputStream.toByteArray();
     }
