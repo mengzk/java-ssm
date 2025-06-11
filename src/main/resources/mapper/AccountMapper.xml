@@ -13,8 +13,8 @@
         <result property="phone" javaType="String" column="phone"/>
         <result property="nickname" javaType="String" column="nickname"/>
         <result property="birthday" javaType="Date" column="birthday"/>
-        <result property="icon" javaType="String" column="icon"/>
-        <result property="signature" javaType="String" column="sign"/>
+        <result property="profile" javaType="String" column="profile"/>
+        <result property="signature" javaType="String" column="signature"/>
         <result property="email" javaType="String" column="email"/>
         <result property="sex" javaType="Integer" column="sex"/>
         <!--        <result property="city" javaType="Integer" column="city"/>-->
@@ -26,7 +26,7 @@
     </resultMap>
 
     <select id="login" resultMap="accountMap">
-        SELECT * FROM account
+        SELECT * FROM s_account
         <where>
             <if test="body.phone!=null and body.phone!=''">
                 phone=#{body.phone}
@@ -37,14 +37,14 @@
             <if test="body.email!=null and body.email!=''">
                 or email=#{body.email}
             </if>
-            <if test="body.sign!=null and body.sign!=''">
-                or sign=#{body.sign}
+            <if test="body.signature!=null and body.signature!=''">
+                or signature=#{body.signature}
             </if>
         </where>
     </select>
 
     <select id="query" resultType="int">
-        SELECT id FROM account where
+        SELECT id FROM s_account where
         <if test="body.phone!=null and body.phone!=''">
             phone = #{body.phone}
         </if>
@@ -54,28 +54,28 @@
     </select>
 
     <select id="queryById" resultMap="accountMap">
-        SELECT * FROM account where id=#{id};
+        SELECT * FROM s_account where id=#{id};
     </select>
 
     <select id="queryByUid" resultMap="accountMap">
-        SELECT * FROM account where uid=#{uid};
+        SELECT * FROM s_account where uid=#{uid};
     </select>
 
     <select id="queryByPhone" resultMap="accountMap">
-        SELECT * FROM account where phone=#{phone};
+        SELECT * FROM s_account where phone=#{phone};
     </select>
 
     <insert id="register" parameterType="com.item.study.model.body.AccountBody" useGeneratedKeys="true"
             keyProperty="id">
-        insert into account (uid,pwd,sign,phone,email,icon,nickname,create_time) values
-        (#{user.uid},#{user.pwd},#{user.sign},#{user.phone},#{user.email},#{user.icon},#{user.nickname},NOW())
+        insert into s_account (uid,pwd,signature,phone,email,profile,nickname,create_time) values
+        (#{user.uid},#{user.pwd},#{user.signature},#{user.phone},#{user.email},#{user.profile},#{user.nickname},NOW())
         <selectKey keyProperty="id" resultType="int" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>
     </insert>
 
     <update id="updateAccount">
-        update account
+        update s_account
         <set>
             <if test="body.pwd!=null">
                 pwd = #{body.pwd}
@@ -88,19 +88,19 @@
     </update>
 
     <select id="reset" resultType="int">
-        SELECT count(*) FROM account;
+        SELECT count(*) FROM s_account;
     </select>
 
     <select id="logout" resultType="int">
-        SELECT count(*) FROM account;
+        SELECT count(*) FROM s_account;
     </select>
 
     <select id="total" resultType="int">
-        SELECT count(*) FROM account;
+        SELECT count(*) FROM s_account;
     </select>
 
     <select id="lastId" resultType="int">
-        SELECT id FROM account ORDER BY id DESC LIMIT 1;
+        SELECT id FROM s_account ORDER BY id DESC LIMIT 1;
     </select>
 
 </mapper>

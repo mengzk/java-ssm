@@ -12,7 +12,7 @@ public class AccountDao {
     private String phone;
     private String email;
     private String signature;
-    private String icon;
+    private String profile;
     private int status;
     private int level;
     private int score;
@@ -28,7 +28,7 @@ public class AccountDao {
                 "id=" + id +
                 ", nickname='" + nickname + '\'' +
                 ", signature='" + signature + '\'' +
-                ", icon='" + icon + '\'' +
+                ", profile='" + profile + '\'' +
                 ", level=" + level +
                 ", shareCode='" + shareCode + '\'' +
                 ", createTime='" + createTime + '\'' +
@@ -83,12 +83,12 @@ public class AccountDao {
         this.signature = sign;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getProfile() {
+        return profile;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 
     public int getStatus() {

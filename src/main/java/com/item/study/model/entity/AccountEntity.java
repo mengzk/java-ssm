@@ -15,7 +15,7 @@ public class AccountEntity {
     public String phone;
     public String email;
     public String nickname;
-    public String icon;
+    public String profile;
     public String birthday; // 2000-01-01
     public Date createTime;
     public Integer sex; // 1 男 2 女
@@ -32,7 +32,7 @@ public class AccountEntity {
                 ", signature='" + signature + '\'' +
                 ", phone='" + phone + '\'' +
                 ", nickname='" + nickname + '\'' +
-                ", icon='" + icon + '\'' +
+                ", profile='" + profile + '\'' +
                 ", level=" + level +
                 ", score=" + score +
                 ", status=" + status +

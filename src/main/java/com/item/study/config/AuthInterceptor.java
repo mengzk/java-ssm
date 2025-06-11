@@ -31,13 +31,13 @@ public class AuthInterceptor implements HandlerInterceptor {
         boolean expire = TokenUtils.isExpired(token);
         if (expire) {
             logger.warn("token is expired");
-            writeResponse(response, 402, CommonError.UNAUTHORIZED.getCEMsg());
+            writeResponse(response, 401, CommonError.UNAUTHORIZED.getCEMsg());
             return false;
         }
         int id = TokenUtils.getUserId(token);
         if (id <= 0) {
             logger.warn("token is invalid");
-            writeResponse(response, 401, CommonError.INVALID_TOKEN.getCEMsg());
+            writeResponse(response, 402, CommonError.INVALID_TOKEN.getCEMsg());
             return false;
         }
         return true;

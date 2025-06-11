@@ -14,7 +14,7 @@ public class AccountBody {
     public String email;
     public String phone;
     public String signature;
-    public String icon;
+    public String profile;
     public String code;
     public String birthday;
     public Date createTime;
@@ -37,7 +37,7 @@ public class AccountBody {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", signature='" + signature + '\'' +
-                ", icon='" + icon + '\'' +
+                ", profile='" + profile + '\'' +
                 ", code='" + code + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", createTime=" + createTime +

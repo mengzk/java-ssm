@@ -12,11 +12,11 @@
     <cache/>
 
     <insert id="insert">
-        INSERT INTO token (userId, value) VALUES (#{id},#{value});
+        INSERT INTO s_token (userId, value) VALUES (#{id},#{value});
     </insert>
 
     <update id="update">
-        UPDATE token
+        UPDATE s_token
         <set>
             value=#{value}
         </set>
@@ -25,15 +25,15 @@
 
     <!--  添加缓存  -->
     <select id="query" resultType="com.item.study.model.entity.TokenEntity">
-        SELECT * FROM token where userId=#{id};
+        SELECT * FROM s_token where userId=#{id};
     </select>
 
     <delete id="delete">
-        DELETE FROM token WHERE userId=#{id};
+        DELETE FROM s_token WHERE userId=#{id};
     </delete>
 
     <update id="resets">
-        UPDATE token
+        UPDATE s_token
         <set>
             value=NULL
         </set>
@@ -41,7 +41,7 @@
     </update>
 
     <select id="exists" resultType="int">
-        SELECT COUNT(*) FROM token WHERE userId=#{id};
+        SELECT COUNT(*) FROM s_token WHERE userId=#{id};
     </select>
 
 </mapper>

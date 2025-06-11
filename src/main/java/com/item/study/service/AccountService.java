@@ -47,7 +47,7 @@ public class AccountService {
 
     public Map<String, Object> register(AccountBody body) throws AppException {
         // 参数校验
-        if (TextUtils.isEmpty(body.pwd)) {
+        if (TextUtils.isEmpty(body.pwd) || TextUtils.isEmpty(body.phone)) {
             throw CustomException.create(CommonError.PARAM_EMPTY);
         }
         // 查询账号
@@ -56,8 +56,12 @@ public class AccountService {
             throw CustomException.create(CommonError.ACCOUNT_EXIST);
         }
         // 生成账号
-        int count = mapper.lastId();
-        body.uid = "U" + String.format("%06d", count + 1001);
+        try {
+            int count = mapper.lastId();
+            body.uid = "U" + String.format("%06d", count + 999);
+        } catch (Exception e) {
+            body.uid = "U" + String.format("%06d", 1001);
+        }
 
         // 注册账号
         int result = mapper.register(body);
