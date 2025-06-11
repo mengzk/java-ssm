@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mon.aichat.mapper.TokenMapper">
+<mapper namespace="com.item.study.mapper.TokenMapper">
 
     <!--    &lt; for < (less-than)-->
     <!--    &gt; for > (greater-than)-->
@@ -24,7 +24,7 @@
     </update>
 
     <!--  添加缓存  -->
-    <select id="query" resultType="com.mon.aichat.model.entity.TokenEntity">
+    <select id="query" resultType="com.item.study.model.entity.TokenEntity">
         SELECT * FROM token where userId=#{id};
     </select>
 

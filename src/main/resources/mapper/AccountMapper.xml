@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mon.aichat.mapper.AccountMapper">
+<mapper namespace="com.item.study.mapper.AccountMapper">
 
     <!-- 配置 查询结果的列明和实体类的属性名的对应关系; -->
-    <resultMap id="accountMap" type="com.mon.aichat.model.entity.AccountEntity">
+    <resultMap id="accountMap" type="com.item.study.model.entity.AccountEntity">
         <!--主键字段的对应 -->
         <id property="id" javaType="Integer" column="id"/>
         <!--非主键字段的对应-->
@@ -12,9 +12,9 @@
         <result property="pwd" javaType="String" column="pwd"/>
         <result property="phone" javaType="String" column="phone"/>
         <result property="nickname" javaType="String" column="nickname"/>
-        <result property="birthday" javaType="String" column="birthday"/>
+        <result property="birthday" javaType="Date" column="birthday"/>
         <result property="icon" javaType="String" column="icon"/>
-        <result property="sign" javaType="String" column="sign"/>
+        <result property="signature" javaType="String" column="sign"/>
         <result property="email" javaType="String" column="email"/>
         <result property="sex" javaType="Integer" column="sex"/>
         <!--        <result property="city" javaType="Integer" column="city"/>-->
@@ -65,7 +65,7 @@
         SELECT * FROM account where phone=#{phone};
     </select>
 
-    <insert id="register" parameterType="com.mon.aichat.model.body.AccountBody" useGeneratedKeys="true"
+    <insert id="register" parameterType="com.item.study.model.body.AccountBody" useGeneratedKeys="true"
             keyProperty="id">
         insert into account (uid,pwd,sign,phone,email,icon,nickname,create_time) values
         (#{user.uid},#{user.pwd},#{user.sign},#{user.phone},#{user.email},#{user.icon},#{user.nickname},NOW())
