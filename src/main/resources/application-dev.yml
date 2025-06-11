@@ -5,10 +5,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/test03?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/test_step?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     driver: com.mysql.cj.jdbc.Driver
-    username: admin
-    password: admin_cab
+    username: root
+    password: admin123
     druid:
       initial-size: 5 #连接池初始化大小
       min-idle: 10 #最小空闲连接数
