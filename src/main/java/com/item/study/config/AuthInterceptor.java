@@ -3,7 +3,7 @@ package com.item.study.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.item.study.model.result.ResultBody;
 import com.item.study.modules.exception.CommonError;
-import com.item.study.utils.TokenUtils;
+import com.item.study.utils.JwtToken;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -28,13 +28,13 @@ public class AuthInterceptor implements HandlerInterceptor {
             writeResponse(response, 400, CommonError.NOT_LOGIN.getCEMsg());
             return false;
         }
-        boolean expire = TokenUtils.isExpired(token);
+        boolean expire = JwtToken.check(token);
         if (expire) {
             logger.warn("token is expired");
             writeResponse(response, 401, CommonError.UNAUTHORIZED.getCEMsg());
             return false;
         }
-        int id = TokenUtils.getUserId(token);
+        int id = JwtToken.getId(token);
         if (id <= 0) {
             logger.warn("token is invalid");
             writeResponse(response, 402, CommonError.INVALID_TOKEN.getCEMsg());

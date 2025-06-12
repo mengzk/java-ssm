@@ -18,7 +18,7 @@ public class AccountBody {
     public String code;
     public String birthday;
     public Date createTime;
-    public int sex; // 1 男 2 女
+    public int gender; // 1 男 2 女
     public int channel; // 0 未知 1 微信 2 QQ 3 微博
     public int level; // 0 普通用户 9 管理员
     public int score; // 积分
@@ -41,7 +41,7 @@ public class AccountBody {
                 ", code='" + code + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", createTime=" + createTime +
-                ", sex=" + sex +
+                ", gender=" + gender +
                 ", channel=" + channel +
                 ", level=" + level +
                 ", score=" + score +

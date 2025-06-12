@@ -3,7 +3,7 @@ package com.item.study.config;
 /**
  * Author: Meng
  * Date: 2024-12-20
- * Desc: 配置类
+ * Desc: 配置类 -主要用于注册拦截器
  */
 
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +19,10 @@ public class ApplicationConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(rateLimitInterceptor)
-                .addPathPatterns("/**");
+                .addPathPatterns("/**"); // Apply rate limiting to all endpoints
+
         registry.addInterceptor(authInterceptor)
-                .addPathPatterns("/**") // Apply to all endpoints
-                .excludePathPatterns("/account/login", "/account/register"); // Exclude login and register endpoints
+                .addPathPatterns("/**")
+                .excludePathPatterns("/account/login", "/account/register"); // 过滤登录和注册接口
     }
 }

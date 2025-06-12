@@ -12,7 +12,7 @@ import java.util.Base64;
  * Date: 2024-07-23
  * Desc:
  */
-public class TokenUtils {
+public class TokenUtil {
     private static final String ENCODE_RULE = "AES"; // 转换模式
     private static final String ENCODE_KEY = "QXKALHZJDCOPVNMS"; // 16位 -每隔1周更换一次
     private static final int GAP = Configs.Token_Gap; // token过期时间 1小时

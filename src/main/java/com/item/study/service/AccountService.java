@@ -8,8 +8,8 @@ import com.item.study.model.entity.AccountEntity;
 import com.item.study.modules.exception.AppException;
 import com.item.study.modules.exception.CommonError;
 import com.item.study.modules.exception.CustomException;
+import com.item.study.utils.JwtToken;
 import com.item.study.utils.TextUtils;
-import com.item.study.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,12 +56,13 @@ public class AccountService {
             throw CustomException.create(CommonError.ACCOUNT_EXIST);
         }
         // 生成账号
+        int count = 0;
         try {
-            int count = mapper.lastId();
-            body.uid = "U" + String.format("%06d", count + 999);
+            count = mapper.lastId();
         } catch (Exception e) {
-            body.uid = "U" + String.format("%06d", 1001);
+            e.fillInStackTrace();
         }
+        body.uid = "U" + String.format("%06d", count + 1);
 
         // 注册账号
         int result = mapper.register(body);
@@ -78,7 +79,8 @@ public class AccountService {
         }
         account.pwd = null; // 隐藏密码
         // 生成token
-        String token = TokenUtils.create(account.id, account.level);
+        String token = JwtToken.create(account.id, account.level);
+//        System.out.println(token);
         int exists = tokenMapper.exists(account.id);
         if (exists < 1) {
             tokenMapper.insert(account.id, token);

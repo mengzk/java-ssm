@@ -3,7 +3,7 @@ package com.item.study.config;
 /**
  * Author: Meng
  * Date: 2024-07-23
- * Desc:
+ * Desc: 全局配置类
  */
 public class Configs {
     // 智谱AI 配置

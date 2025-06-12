@@ -16,7 +16,7 @@
         <result property="profile" javaType="String" column="profile"/>
         <result property="signature" javaType="String" column="signature"/>
         <result property="email" javaType="String" column="email"/>
-        <result property="sex" javaType="Integer" column="sex"/>
+        <result property="gender" javaType="Integer" column="gender"/>
         <!--        <result property="city" javaType="Integer" column="city"/>-->
         <result property="level" javaType="Integer" column="level"/>
         <result property="score" javaType="Integer" column="score"/>

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Author: Meng
  * Date: 2024-12-20
- * Desc:
+ * Desc: 缓存配置类
  */
 
 @Configuration

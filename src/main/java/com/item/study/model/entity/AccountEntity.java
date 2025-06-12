@@ -18,7 +18,7 @@ public class AccountEntity {
     public String profile;
     public String birthday; // 2000-01-01
     public Date createTime;
-    public Integer sex; // 1 男 2 女
+    public Integer gender; // 1 男 2 女
     public Integer channel; // 0 未知 1 微信 2 QQ 3 微博
     public Integer level; // 0 普通用户 9 管理员
     public Integer score; // 积分
