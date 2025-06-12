@@ -138,6 +138,10 @@
             <version>3.5.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
         <!-- pdf生成 -->
 <!--        <dependency>-->
 <!--            <groupId>com.itextpdf</groupId>-->

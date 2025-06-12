@@ -14,6 +14,11 @@ spring:
       max-file-size: 300MB #限制文件上传大小为300M
       max-request-size: 300MB
 
+  redis:
+    host: localhost
+    port: 6379
+    password: # 如果有密码则填写
+
 mybatis:
   mapper-locations:
     - classpath:mapper/*.xml
