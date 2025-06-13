@@ -11,6 +11,29 @@ import org.springframework.web.bind.annotation.*;
  * Author: Meng
  * Date: 2024-07-23
  * Desc: 账号管理
+ * 账号表（account） 用于存储用户的基本信息
+ * CREATE TABLE account (
+     id BIGINT PRIMARY KEY AUTO_INCREMENT,
+     username VARCHAR(45) NOT NULL UNIQUE,
+     password VARCHAR(24) NOT NULL,
+     nickname VARCHAR(45) DEFAULT NULL,
+     email VARCHAR(63) DEFAULT NULL,
+     phone VARCHAR(11) DEFAULT NULL,
+     avatar VARCHAR(200) DEFAULT NULL,
+     gender TINYINT DEFAULT 0,
+     birthday DATE DEFAULT NULL,
+     last_login_time DATETIME DEFAULT NULL,
+     last_login_ip VARCHAR(45) DEFAULT NULL,
+     address VARCHAR(255) DEFAULT NULL,
+     real_name VARCHAR(64) DEFAULT NULL,
+     id_card VARCHAR(32) DEFAULT NULL,
+     level INT DEFAULT 0,
+     score INT DEFAULT 0,
+     vip_expire_time DATETIME DEFAULT NULL,
+     status TINYINT NOT NULL DEFAULT 1,
+     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+ );
  */
 
 @RestController

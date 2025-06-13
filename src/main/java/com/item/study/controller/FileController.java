@@ -23,13 +23,13 @@ public class FileController {
 
     // 上传文件构建知识库
     @RequestMapping(value = "upload", method = RequestMethod.POST)
-    public ResultBody upload(@RequestParam("file") MultipartFile file, @RequestParam("userId") String tag) throws Exception {
+    public ResultBody upload(@RequestParam("file") MultipartFile file, @RequestParam(value = "userId", required = false) String tag) throws Exception {
         return ResultBody.success(service.upload(file, tag));
     }
 
     // 上传文件构建知识库
     @RequestMapping(value = "uploads", method = RequestMethod.POST)
-    public ResultBody uploads(@RequestParam("files") List<MultipartFile> files, @RequestParam("userId") String tag) throws Exception {
+    public ResultBody uploads(@RequestParam("files") List<MultipartFile> files, @RequestParam(value = "userId", required = false) String tag) throws Exception {
         return ResultBody.success(service.uploads(files, tag));
     }
 
