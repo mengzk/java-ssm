@@ -88,8 +88,8 @@ public class AccountController {
      * 查询账号信息
      */
     @RequestMapping(value = "info", method = RequestMethod.GET)
-    public ResultBody info(@RequestParam("id") Integer id) throws Exception {
-        return ResultBody.success("");
+    public ResultBody info(@RequestHeader(value = "token", required = true) String token) throws Exception {
+        return ResultBody.success(service.info(token));
     }
 
     /**

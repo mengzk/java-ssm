@@ -20,7 +20,7 @@ public interface AccountMapper {
 
     int query(@Param("body") LoginBody body);
 
-    AccountDao queryById(@Param("id") int id);
+    AccountEntity queryById(@Param("id") int id);
 
     AccountDao queryByUid(@Param("uid") String uid);
 

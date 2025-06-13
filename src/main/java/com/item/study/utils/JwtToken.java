@@ -5,13 +5,15 @@ import com.auth0.jwt.algorithms.Algorithm;
 
 import java.util.Base64;
 import java.util.Date;
+import java.util.UUID;
 
 public class JwtToken {
-    private static long GAP = 60 * 60 * 1000; // token过期时间 1小时
+    private static long GAP = 24 * 60 * 60 * 1000; // token过期时间 1天
     private static String SECRET_KEY = "QXKALHZJDCOPVNMS"; // 16位 -每隔1周更换一次
     private static String ISSUER = "ItemStudy"; // 发行人
     private static String AUDIENCE = "ItemStudyUser"; // 受众
     private static String TOKEN_PREFIX = "Bearer ";
+    private static Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
 
     /**
      * 创建JWT Token
@@ -22,11 +24,12 @@ public class JwtToken {
        String token = JWT.create()
 //                .withIssuer(ISSUER)
 //                .withAudience(AUDIENCE)
+//                .withJWTId(UUID.randomUUID().toString())
                 .withClaim("id", id)
                 .withClaim("l", level)
-                .withIssuedAt(now)
+//                .withIssuedAt(now)
                 .withExpiresAt(expiresAt)
-                .sign(Algorithm.HMAC256(SECRET_KEY));
+                .sign(algorithm);
 
         return Base64.getEncoder().encodeToString(token.getBytes());
     }
@@ -57,7 +60,7 @@ public class JwtToken {
                 return false;
             }
             // 解析JWT
-            JWT.require(Algorithm.HMAC256(SECRET_KEY))
+            JWT.require(algorithm)
                     .build()
                     .verify(parsedToken);
             return true;

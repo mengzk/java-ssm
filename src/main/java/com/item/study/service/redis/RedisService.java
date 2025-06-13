@@ -24,6 +24,14 @@ public class RedisService {
         return redisTemplate.opsForValue().get(key);
     }
 
+    public void delete(String key) {
+        redisTemplate.delete(key);
+    }
+
+    public boolean exists(String key) {
+        return redisTemplate.hasKey(key);
+    }
+
     public void sendMessage(String message) {
         redisTemplate.opsForList().leftPush(QUEUE_NAME, message);
     }

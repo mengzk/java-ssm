@@ -4,6 +4,8 @@ import com.item.study.mapper.AccountMapper;
 import com.item.study.mapper.TokenMapper;
 import com.item.study.model.body.AccountBody;
 import com.item.study.model.body.LoginBody;
+import com.item.study.model.dto.AccountDao;
+import com.item.study.model.dto.AccountLoginDao;
 import com.item.study.model.entity.AccountEntity;
 import com.item.study.modules.exception.AppException;
 import com.item.study.modules.exception.CommonError;
@@ -28,7 +30,7 @@ public class AccountService {
     @Autowired
     TokenMapper tokenMapper;
 
-    public Map<String, Object> login(LoginBody body) throws AppException {
+    public AccountDao login(LoginBody body) throws AppException {
         // 参数校验
         if (TextUtils.isEmpty(body.pwd) || TextUtils.isEmpty(body.phone)) {
             throw CustomException.create(CommonError.PARAM_EMPTY);
@@ -45,7 +47,7 @@ public class AccountService {
         return accountLogin(account, body.phone);
     }
 
-    public Map<String, Object> register(AccountBody body) throws AppException {
+    public AccountDao register(AccountBody body) throws AppException {
         // 参数校验
         if (TextUtils.isEmpty(body.pwd) || TextUtils.isEmpty(body.phone)) {
             throw CustomException.create(CommonError.PARAM_EMPTY);
@@ -73,7 +75,7 @@ public class AccountService {
     }
 
     // 获取账号信息
-    private Map<String, Object> accountLogin(AccountEntity account, String phone) {
+    private AccountDao accountLogin(AccountEntity account, String phone) {
         if (account == null) {
             account = mapper.queryByPhone(phone);
         }
@@ -87,11 +89,11 @@ public class AccountService {
         } else {
             tokenMapper.update(account.id, token);
         }
+
         // 返回账号信息
-        Map<String, Object> map = new HashMap<>();
-        map.put("user", account);
-        map.put("token", token);
-        return map;
+        AccountLoginDao dao = new AccountLoginDao(account);
+        dao.token = token;
+        return dao;
     }
 
     public int query(int size, int page) {
@@ -126,8 +128,14 @@ public class AccountService {
         return 0;
     }
 
-    public int info(String code) {
-        return 0;
+    public AccountDao info(String token) throws AppException {
+        int id = JwtToken.getId(token);
+        // 查询账号
+        AccountEntity account = mapper.queryById(id);
+        if (account == null) {
+            throw CustomException.create(CommonError.ACCOUNT_NOT_EXIST);
+        }
+        return new AccountDao(account);
     }
 
     public int find(String code) {

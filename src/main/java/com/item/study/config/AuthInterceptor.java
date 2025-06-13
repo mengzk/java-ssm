@@ -29,7 +29,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             return false;
         }
         boolean expire = JwtToken.check(token);
-        if (expire) {
+        if (!expire) {
             logger.warn("token is expired");
             writeResponse(response, 401, CommonError.UNAUTHORIZED.getCEMsg());
             return false;
