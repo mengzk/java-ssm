@@ -95,7 +95,7 @@ public class OkClient {
         File file = new File("README.png");
         Request request = new Request.Builder()
                 .url("https://api.github.com/markdown/raw")
-                .post(RequestBody.create(MEDIA_PNG, file))
+                .post(RequestBody.create(file, MEDIA_PNG))
                 .build();
     }
 
@@ -105,7 +105,7 @@ public class OkClient {
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("title", "Square Logo")
                 .addFormDataPart("image", "logo-square.png",
-                        RequestBody.create(MEDIA_PNG, new File("website/static/logo-square.png")))
+                        RequestBody.create(new File("website/static/logo-square.png"), MEDIA_PNG))
                 .build();
         String IMGUR_CLIENT_ID = "...";
         Request request = new Request.Builder()

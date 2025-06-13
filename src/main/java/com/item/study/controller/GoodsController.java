@@ -77,7 +77,7 @@ public class GoodsController {
     }
 
     /**
-     * 查询预约
+     * 查询商品
      */
     @RequestMapping(value = "search", method = RequestMethod.GET)
     public ResultBody queryList(@RequestParam(value = "page", defaultValue = "1") Integer page,
