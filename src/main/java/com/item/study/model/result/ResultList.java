@@ -22,6 +22,10 @@ public class ResultList<T> {
         this.more = total > size * page;
     }
 
+    public static <T> ResultList<T> ok(List<T> list, int total, int page, int size) {
+        return new ResultList<T>(list, total, page, size);
+    }
+
     public static <T> ResultList<T> create(List<T> list, int total, int page, int size) {
         return new ResultList<T>(list, total, page, size);
     }

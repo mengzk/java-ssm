@@ -4,12 +4,13 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
 /**
  * Author: Meng
  * Date: 2024-07-23
  * Desc:
  */
-public interface TmpMapper {
+public interface GoodsMapper {
 
     List<String> onQuery(@Param("id") int id);
 
@@ -22,5 +23,4 @@ public interface TmpMapper {
     int onDelete(@Param("id") int userId);
 
     int onCount();
-
 }

@@ -1,10 +1,12 @@
 package com.item.study.service;
 
+import com.item.study.mapper.GoodsMapper;
 import com.item.study.model.body.GoodsBody;
 import com.item.study.model.result.ResultList;
 import com.item.study.modules.exception.AppException;
 import com.item.study.modules.exception.CommonError;
 import com.item.study.modules.exception.CustomException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ import java.util.List;
  */
 @Service
 public class GoodsService {
+    @Autowired
+    private GoodsMapper mapper;
 
     //
     public int create(GoodsBody body) throws AppException {
