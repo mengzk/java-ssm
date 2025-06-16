@@ -30,7 +30,7 @@ public class EmailHelper {
             //主题
             helper.setSubject("欢迎您的加入！！！");
             //开启html模式
-            helper.setText("<h1>我想你一定会喜欢这里吧！！！</h1>" +
+            helper.setText("<h1>你一定会喜欢这里的！！！</h1>" +
                     "<p>你的账号为:"+account+"</p>" +
                     "<p>你的密码为："+account+"</p>", true);
             //附件

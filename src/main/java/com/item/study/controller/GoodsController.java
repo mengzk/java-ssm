@@ -1,6 +1,9 @@
 package com.item.study.controller;
 
+import com.item.study.model.body.GoodsBody;
 import com.item.study.model.result.ResultBody;
+import com.item.study.service.GoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -11,14 +14,15 @@ import org.springframework.web.bind.annotation.*;
  * 规格表（spec）：存储规格名称（如颜色、尺码）。
  * 规格值表（spec_value）：存储具体的规格值（如红色、XL）。
  * SKU表（sku）：每种规格组合为一个SKU，存储价格、库存等。
+
  -- 商品SPU表
  CREATE TABLE goods (
      id BIGINT PRIMARY KEY AUTO_INCREMENT,
      name VARCHAR(128) NOT NULL,
+     cover VARCHAR(255),
      description TEXT,
      category_id BIGINT,
      status TINYINT NOT NULL DEFAULT 1,
-     cover VARCHAR(255),
      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
  );
@@ -42,6 +46,8 @@ import org.springframework.web.bind.annotation.*;
      id BIGINT PRIMARY KEY AUTO_INCREMENT,
      goods_id BIGINT NOT NULL,
      price INT NOT NULL,
+     cover VARCHAR(255),
+     sold INT NOT NULL DEFAULT 0,
      stock INT NOT NULL DEFAULT 0,
      status TINYINT NOT NULL DEFAULT 1,
      spec_value_ids VARCHAR(128) NOT NULL, -- 逗号分隔的规格值ID
@@ -49,19 +55,33 @@ import org.springframework.web.bind.annotation.*;
      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
      FOREIGN KEY (goods_id) REFERENCES goods(id)
  );
+ -- 商品评论表
+ CREATE TABLE goods_comment (
+     id BIGINT PRIMARY KEY AUTO_INCREMENT,
+     goods_id BIGINT NOT NULL,
+     user_id BIGINT NOT NULL,
+     score TINYINT NOT NULL, -- 评分（如1-5分）
+     content TEXT,           -- 评论内容
+     imgs VARCHAR(1024),      -- 图片（逗号分隔的图片URL）
+     status TINYINT NOT NULL DEFAULT 1, -- 状态（如1-正常，0-删除）
+     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+     FOREIGN KEY (goods_id) REFERENCES goods(id)
+ );
  */
 
 @RestController
 @RequestMapping("/goods")
 public class GoodsController {
+    @Autowired
+    private GoodsService service;
 
     /**
      * 新建商品
      */
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public ResultBody create(@RequestBody() String body, @RequestHeader("token") String token) throws Exception {
+    public ResultBody create(@RequestBody() GoodsBody body, @RequestHeader("token") String token) throws Exception {
 //        body.uid = TokenUtils.getUserId(token);
-        return ResultBody.success(0);
+        return ResultBody.success(service.create(body));
     }
 
     /**
@@ -69,9 +89,6 @@ public class GoodsController {
      */
     @RequestMapping(value = "detail", method = RequestMethod.GET)
     public ResultBody detail(@RequestParam("id") Integer id) throws Exception {
-        if (id == null || id <= 0) {
-            return ResultBody.fail( 0,"Invalid ID");
-        }
         // 假设查询商品详情的逻辑
         return ResultBody.success(0);
     }
@@ -80,7 +97,7 @@ public class GoodsController {
      * 查询商品
      */
     @RequestMapping(value = "search", method = RequestMethod.GET)
-    public ResultBody queryList(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    public ResultBody search(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                 @RequestParam(value = "size", defaultValue = "10", required = false) Integer size,
                                 @RequestParam(required = false) String name,
                                 @RequestParam(required = false) Long categoryId,

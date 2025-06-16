@@ -1,5 +1,6 @@
 package com.item.study.service;
 
+import com.item.study.model.body.GoodsBody;
 import com.item.study.model.result.ResultList;
 import com.item.study.modules.exception.AppException;
 import com.item.study.modules.exception.CommonError;
@@ -18,15 +19,31 @@ import java.util.List;
 public class GoodsService {
 
     //
-    public int add(String body) throws AppException {
+    public int create(GoodsBody body) throws AppException {
+        if(body == null || body.name == null || body.name.isEmpty()) {
+            throw CustomException.create(CommonError.PARAM_EMPTY);
+        }
+
         return 0;
     }
 
     //
-    public ResultList<String> query(int size, int page) throws AppException {
+    public int detail(Integer id) throws AppException {
+        if(id == null) {
+            throw CustomException.create(CommonError.PARAM_EMPTY);
+        }
+        return 0;
+    }
+
+    //
+    public ResultList<String> search(int size, int page) throws AppException {
         int start = (page - 1) * size;
         List<String> list = new ArrayList<>();
         return ResultList.create(list, 0, page, size);
+    }
+
+    public int count() throws AppException {
+        return 0;
     }
 
     //

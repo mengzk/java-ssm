@@ -1,5 +1,8 @@
 package com.item.study.modules.network;
 
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import com.google.gson.Gson;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -13,28 +16,33 @@ import java.io.IOException;
  * Date: 2024-07-23
  * Desc:
  */
-public abstract class OkCallback<T> implements Callback {
-    private final String TAG = "OkCallback";
+public abstract class OkBack<T> implements Callback {
+    private final String TAG = "OkBack";
 
     @Override
     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
         if (response.isSuccessful()) {
             String data = null;
-            MediaType mt = response.body().contentType();
+            MediaType mt = response.body() != null ? response.body().contentType() : null;
             if (response.body() != null) {
                 data = response.body().string();
-                System.out.printf("onResponse -----> %s", data);
+//                System.out.printf("onResponse -----> %s", data);
             }else {
-                System.out.println("onResponse -----> %" + mt.type());
+//                System.out.println("onResponse -----> %" + mt.type());
             }
 //            System.out.printf("%S---> %s%n", TAG, data);
             if (data != null) {
-//                Gson gson = new Gson();
-//                OkResult result = gson.fromJson(data, OkResult.class);
-//                onResult(result);
-//                onResult(data);
+                Gson gson = new Gson();
+                Type type = new TypeToken<OkResult<T>>(){}.getType();
+                try{
+                    OkResult<T> result = gson.fromJson(data, type);
+                    onData(result);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    onFail(-1010, e.getMessage());
+                }
             } else {
-                onFail(-1, response.message());
+                onFail(-1020, response.message());
             }
         } else {
             onFail(response.code(), response.message());
@@ -51,6 +59,6 @@ public abstract class OkCallback<T> implements Callback {
         System.out.printf("%s---> %d%s", TAG, code, msg);
     }
 
-    protected abstract void onResult(OkResult<T> data);
+    protected abstract void onData(OkResult<T> data);
 
 }
