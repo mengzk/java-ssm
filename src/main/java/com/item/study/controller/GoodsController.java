@@ -85,6 +85,15 @@ public class GoodsController {
     }
 
     /**
+     * 新建商品
+     */
+    @RequestMapping(value = "addSku", method = RequestMethod.POST)
+    public ResultBody addSku(@RequestBody() GoodsBody body, @RequestHeader("token") String token) throws Exception {
+//        body.uid = TokenUtils.getUserId(token);
+        return ResultBody.success(service.create(body));
+    }
+
+    /**
      * 查询商品详情
      */
     @RequestMapping(value = "detail", method = RequestMethod.GET)

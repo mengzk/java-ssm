@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
      id BIGINT PRIMARY KEY AUTO_INCREMENT,
      code VARCHAR(64) UNIQUE,
      name VARCHAR(128) NOT NULL,
-     type TINYINT NOT NULL DEFAULT 0, -- 0:满减 1:折扣 2:现金券
+     tag TINYINT NOT NULL DEFAULT 0, -- 0:满减 1:折扣 2:现金券
      amount INT NOT NULL,
      min_amount INT NOT NULL DEFAULT 0,
      start_time DATETIME NOT NULL,

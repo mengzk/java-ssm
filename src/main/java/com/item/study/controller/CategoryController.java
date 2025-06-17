@@ -1,6 +1,9 @@
 package com.item.study.controller;
 
+import com.item.study.model.entity.CategoryEntity;
 import com.item.study.model.result.ResultBody;
+import com.item.study.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -9,52 +12,51 @@ import org.springframework.web.bind.annotation.*;
  * Desc: 产品管理控制器
  * 商品管理接口一般包括：新增、查询详情、列表、更新、删除等。
  * 下面是一个典型的 RESTful 风格接口设计说明及示例代码。
- *
- * 接口设计说明：
- * POST /goods：新增商品
- * GET /goods/{id}：查询商品详情
- * GET /goods：分页查询商品列表
- * PUT /goods/{id}：更新商品
- * DELETE /goods/{id}：删除商品
+ * <p>
+ * CREATE TABLE category (
+ * id BIGINT PRIMARY KEY AUTO_INCREMENT,
+ * name VARCHAR(128) NOT NULL COMMENT '分类名称',
+ * parent_id BIGINT DEFAULT NULL COMMENT '父分类ID，NULL表示顶级分类',
+ * level TINYINT NOT NULL DEFAULT 1 COMMENT '分类层级',
+ * status TINYINT NOT NULL DEFAULT 1 COMMENT '状态：1-启用，0-禁用',
+ * created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+ * updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+ * );
  */
 
-//@RestController
-//@RequestMapping("/category")
+@RestController
+@RequestMapping("/category")
 public class CategoryController {
+    @Autowired
+    private CategoryService service;
 
     // 新增商品
-    @PostMapping
-    public ResultBody create(@RequestBody String goodsDTO) {
-        // 新增逻辑
-        return ResultBody.success(0);
+    @PostMapping(path = "/add", produces = "application/json")
+    public ResultBody onAdd(@RequestBody() CategoryEntity body) throws Exception {
+        service.addCategory(body);
+        return ResultBody.success("分类添加成功");
     }
 
-    // 查询商品详情
-    @GetMapping("/{id}")
-    public ResultBody detail(@PathVariable Long id) {
-        // 查询逻辑
-        return ResultBody.success(0);
+    @PutMapping("/update")
+    public ResultBody onUpdate(@RequestBody CategoryEntity body) throws Exception {
+        service.updateCategory(body);
+        return ResultBody.success("分类更新成功");
     }
 
-    // 分页查询商品列表
-    @GetMapping
-    public ResultBody list(@RequestParam(defaultValue = "1") Integer page,
-                           @RequestParam(defaultValue = "10") Integer size) {
-        // 查询逻辑
-        return ResultBody.success(0);
+    @PutMapping("/changeStatus")
+    public ResultBody changeStatus(@RequestParam Integer id, @RequestParam Integer status) throws Exception {
+        service.changeStatus(id, status);
+        return ResultBody.success("状态更新成功");
     }
 
-    // 更新商品
-    @PutMapping("/{id}")
-    public ResultBody update(@PathVariable Long id, @RequestBody String goodsDTO) {
-        // 更新逻辑
-        return ResultBody.success(0);
+    @DeleteMapping("/delete")
+    public ResultBody onDelete(@RequestParam Integer id) throws Exception {
+        service.deleteCategory(id);
+        return ResultBody.success("分类删除成功");
     }
 
-    // 删除商品
-    @DeleteMapping("/{id}")
-    public ResultBody delete(@PathVariable Long id) {
-        // 删除逻辑
-        return ResultBody.success(0);
+    @GetMapping("/query")
+    public ResultBody onQuery(@RequestParam Integer status, @RequestParam String key) throws Exception {
+        return ResultBody.success(service.onQuery(status, key));
     }
 }

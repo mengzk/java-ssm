@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.mon.aichat.mapper.TmpMapper">
+<mapper namespace="com.item.study.mapper.TmpMapper">
 
     <!--    &lt; = < (小于号)-->
     <!--    &gt; = > (大于号)-->
@@ -15,7 +15,7 @@
     <!--        <result property="createDate" javaType="Date" column="create_date"/>-->
     <!--    </resultMap>-->
 
-<!--  缓存配置  -->
+    <!--  缓存配置  -->
     <!--    <cache/>-->
 
     <insert id="insert">
@@ -25,7 +25,12 @@
     <update id="update">
         UPDATE test
         <set>
-            value=#{value}
+            <if test="body.pwd!=null">
+                pwd = #{body.pwd}
+            </if>
+            <if test="body.nickname!=null">
+                nickname = #{body.nickname}
+            </if>
         </set>
         WHERE userId=#{id};
     </update>
@@ -42,21 +47,21 @@
     <select id="selectTest">
         SELECT * FROM test WHERE 1=1
         <choose>
-<!--   if    -->
+            <!--   if    -->
             <when test="name != null">
                 AND name = #{name}
             </when>
             <when test="age != null">
                 AND age = #{age}
             </when>
-<!--   else   -->
+            <!--   else   -->
             <otherwise>
                 AND status = 'active'
             </otherwise>
         </choose>
     </select>
 
-<!--  使用if和else而不使用WHERE 1=1，可以使用<where>元素。<where>元素自动处理where关键字的位置，并删除任何前导and或or条件  -->
+    <!--  使用if和else而不使用WHERE 1=1，可以使用<where>元素。<where>元素自动处理where关键字的位置，并删除任何前导and或or条件  -->
     <select id="selectTest3">
         SELECT * FROM users
         <where>

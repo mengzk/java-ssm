@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.item.study.mapper.CategoryMapper">
+
+    <!-- 配置 查询结果的列明和实体类的属性名的对应关系; -->
+    <resultMap id="roomMap" type="com.item.study.model.entity.CategoryEntity">
+        <id property="id" javaType="Integer" column="id"/>
+        <result property="parentId" javaType="Integer" column="parent_id"/>
+        <result property="status" javaType="Integer" column="status"/>
+        <result property="createdAt" javaType="Date" column="created_at"/>
+    </resultMap>
+
+    <!--  缓存配置  -->
+    <!--    <cache/>-->
+
+    <insert id="onInsert">
+        INSERT INTO s_goods_category (name, parent_id, status)
+        VALUES (#{body.name}, #{body.parentId}, #{body.status});
+    </insert>
+
+    <update id="onUpdate">
+        UPDATE s_goods_category
+        <set>
+            <if test="body.name!=null">
+                name = #{body.name}
+            </if>
+            <if test="body.status!=null">
+                status = #{body.status}
+            </if>
+        </set>
+        WHERE id=#{body.id};
+    </update>
+
+    <delete id="onDelete">
+        DELETE FROM s_goods_category WHERE id=#{id};
+    </delete>
+
+    <select id="onQuery" resultMap="roomMap">
+        SELECT * FROM s_goods_category
+        <where>
+            <if test="status != null">
+                status = #{status}
+            </if>
+            <if test="key != null and key != ''">
+                AND name LIKE CONCAT('%', #{key}, '%')
+            </if>
+        </where>
+        ORDER BY created_at DESC;
+<!--        LIMIT #{page}, #{size};-->
+    </select>
+
+    <select id="changeStatus">
+        UPDATE s_goods_category
+        <set>
+            status=#{status}
+        </set>
+        WHERE id=#{id};
+    </select>
+
+</mapper>

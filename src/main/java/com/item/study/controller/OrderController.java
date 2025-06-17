@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.*;
  订单表（order） 用于存储订单的基本信息
  CREATE TABLE `order` (
      id BIGINT PRIMARY KEY AUTO_INCREMENT,
-     order_no VARCHAR(64) NOT NULL UNIQUE,
+     code VARCHAR(45) NOT NULL UNIQUE,
      user_id BIGINT NOT NULL,
      total_amount INT NOT NULL,
+     deduct_amount INT NOT NULL,
      status TINYINT NOT NULL DEFAULT 0,
      pay_type TINYINT DEFAULT NULL,
      address_id BIGINT DEFAULT NULL,
@@ -28,8 +29,8 @@ import org.springframework.web.bind.annotation.*;
      id BIGINT PRIMARY KEY AUTO_INCREMENT,
      order_id BIGINT NOT NULL,
      sku_id BIGINT NOT NULL,
-     goods_name VARCHAR(128) NOT NULL,
-     sku_spec VARCHAR(128) DEFAULT NULL,
+     goods_name VARCHAR(100) NOT NULL,
+     sku_spec VARCHAR(100) DEFAULT NULL,
      price INT NOT NULL,
      quantity INT NOT NULL,
      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
