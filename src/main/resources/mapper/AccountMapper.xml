@@ -78,7 +78,7 @@
         update s_account
         <set>
             <if test="body.pwd!=null">
-                pwd = #{body.pwd}
+                pwd = #{body.pwd},
             </if>
             <if test="body.nickname!=null">
                 nickname = #{body.nickname}

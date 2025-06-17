@@ -31,6 +31,11 @@ public class CategoryService {
     }
 
     public void updateCategory(CategoryEntity body) throws AppException {
+        if (body == null || body.id == null) {
+            throw CustomException.create(CommonError.PARAM_EMPTY);
+        }
+
+        int result = mapper.onUpdate(body);
     }
 
     public void changeStatus(Integer id, Integer status) throws AppException {
@@ -41,9 +46,14 @@ public class CategoryService {
     }
 
     public void deleteCategory(Integer id) throws AppException {
+        if (id == null) {
+            throw CustomException.create(CommonError.PARAM_EMPTY);
+        }
+
+        int result = mapper.onDelete(id);
     }
 
     public List<CategoryEntity> onQuery(Integer status, String key) throws AppException {
-        return null;
+        return mapper.onQuery(status, key);
     }
 }

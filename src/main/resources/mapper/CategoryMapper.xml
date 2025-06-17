@@ -4,7 +4,7 @@
 <mapper namespace="com.item.study.mapper.CategoryMapper">
 
     <!-- 配置 查询结果的列明和实体类的属性名的对应关系; -->
-    <resultMap id="roomMap" type="com.item.study.model.entity.CategoryEntity">
+    <resultMap id="cateMap" type="com.item.study.model.entity.CategoryEntity">
         <id property="id" javaType="Integer" column="id"/>
         <result property="parentId" javaType="Integer" column="parent_id"/>
         <result property="status" javaType="Integer" column="status"/>
@@ -23,7 +23,7 @@
         UPDATE s_goods_category
         <set>
             <if test="body.name!=null">
-                name = #{body.name}
+                name = #{body.name},
             </if>
             <if test="body.status!=null">
                 status = #{body.status}
@@ -36,7 +36,7 @@
         DELETE FROM s_goods_category WHERE id=#{id};
     </delete>
 
-    <select id="onQuery" resultMap="roomMap">
+    <select id="onQuery" resultMap="cateMap">
         SELECT * FROM s_goods_category
         <where>
             <if test="status != null">

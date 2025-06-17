@@ -38,7 +38,7 @@ public class CategoryController {
     }
 
     @PutMapping("/update")
-    public ResultBody onUpdate(@RequestBody CategoryEntity body) throws Exception {
+    public ResultBody onUpdate(@RequestBody() CategoryEntity body) throws Exception {
         service.updateCategory(body);
         return ResultBody.success("分类更新成功");
     }
@@ -56,7 +56,7 @@ public class CategoryController {
     }
 
     @GetMapping("/query")
-    public ResultBody onQuery(@RequestParam Integer status, @RequestParam String key) throws Exception {
+    public ResultBody onQuery(@RequestParam(required = false) Integer status, @RequestParam(required = false) String key) throws Exception {
         return ResultBody.success(service.onQuery(status, key));
     }
 }

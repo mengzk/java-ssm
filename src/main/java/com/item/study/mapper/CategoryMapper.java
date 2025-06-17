@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface CategoryMapper {
 
-    List<String> onQuery(@Param("status") Integer status, @Param("key") String key);
+    List<CategoryEntity> onQuery(@Param("status") Integer status, @Param("key") String key);
 
     void onInsert(@Param("body") CategoryEntity body);
 
