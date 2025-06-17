@@ -46,7 +46,9 @@
                 AND name LIKE CONCAT('%', #{key}, '%')
             </if>
         </where>
-        ORDER BY created_at DESC;
+<!--   根据parentId 分组     -->
+        GROUP BY parent_id
+<!--        ORDER BY created_at DESC-->
 <!--        LIMIT #{page}, #{size};-->
     </select>
 
