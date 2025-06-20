@@ -19,4 +19,16 @@ public class CacheConfig {
     public CacheManager cacheManager() {
         return new ConcurrentMapCacheManager("tokens");
     }
+
+    // 其他缓存配置可以在这里添加
+    // 例如使用 Redis 缓存
+    // @Bean
+    // public RedisCacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory) {
+    //     RedisCacheConfiguration cacheConfig = RedisCacheConfiguration.defaultCacheConfig()
+    //             .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+    //     return RedisCacheManager.builder(redisConnectionFactory)
+    //             .cacheDefaults(cacheConfig)
+    //             .transactionAware()
+    //             .build();
+    // }
 }

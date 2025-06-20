@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="defaultStatementTimeout" value="30"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+<!--  开启 SQL 日志分析 MyBatis 的日志功能，分析慢查询并优化： -->
+    <setting name="logImpl" value="STDOUT_LOGGING"/>
+</configuration>

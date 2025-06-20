@@ -15,8 +15,13 @@
     <!--        <result property="createDate" javaType="Date" column="create_date"/>-->
     <!--    </resultMap>-->
 
-    <!--  缓存配置  -->
+    <!--  缓存配置  确保缓存的实体类实现 Serializable 接口，如 TokenEntity implements Serializable  -->
     <!--    <cache/>-->
+<!--    <cache eviction="LRU" flushInterval="60000" size="512" readOnly="true"/>-->
+<!--    eviction：缓存回收策略（如 LRU、FIFO 等）。-->
+<!--    flushInterval：刷新间隔（单位：毫秒）。-->
+<!--    size：缓存大小。-->
+<!--    readOnly：是否只读。-->
 
     <insert id="insert">
         INSERT INTO test (userId, value) VALUES (#{id},#{value});
@@ -87,6 +92,13 @@
         LIMIT #{position}, #{size};
     </select>
 
+<!--  分页查询  -->
+    <select id="findUsersByPage" resultType="User">
+        SELECT * FROM users
+        WHERE status = #{status}
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
 
     <insert id="onInsert3">
         INSERT INTO employee (uid, name, status, company_id, department_id, memo, auth, create_time, update_time)
@@ -106,4 +118,32 @@
             WHERE id=#{id}
         </foreach>
     </update>
+
+<!--  关联查询（多表查询） 通过 resultMap 映射复杂的多表查询结果 -->
+    <select id="findUserWithOrders" resultMap="userOrderMap">
+        SELECT u.id AS user_id, u.name, o.id AS order_id, o.order_no, o.amount
+        FROM users u
+        LEFT JOIN orders o ON u.id = o.user_id
+        WHERE u.id = #{userId}
+    </select>
+    <resultMap id="userOrderMap" type="User">
+        <id property="id" column="user_id"/>
+        <result property="name" column="name"/>
+        <collection property="orders" ofType="Order">
+            <id property="id" column="order_id"/>
+            <result property="orderNo" column="order_no"/>
+            <result property="amount" column="amount"/>
+        </collection>
+    </resultMap>
+
+<!--   CTE 或递归查询 -树形结构数据，可以使用数据库的 CTE（公用表表达式）功能 -->
+    <select id="findDepartmentTree" resultType="Department">
+        WITH RECURSIVE dept_tree AS (
+        SELECT * FROM departments WHERE parent_id = #{rootId}
+        UNION ALL
+        SELECT d.* FROM departments d
+        INNER JOIN dept_tree dt ON d.parent_id = dt.id
+        )
+        SELECT * FROM dept_tree
+    </select>
 </mapper>

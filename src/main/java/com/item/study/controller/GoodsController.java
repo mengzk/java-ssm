@@ -14,59 +14,59 @@ import org.springframework.web.bind.annotation.*;
  * 规格表（spec）：存储规格名称（如颜色、尺码）。
  * 规格值表（spec_value）：存储具体的规格值（如红色、XL）。
  * SKU表（sku）：每种规格组合为一个SKU，存储价格、库存等。
-
- -- 商品SPU表
- CREATE TABLE goods (
-     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-     name VARCHAR(128) NOT NULL,
-     cover VARCHAR(255),
-     description TEXT,
-     category_id BIGINT,
-     status TINYINT NOT NULL DEFAULT 1,
-     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
- );
-
- -- 规格表
- CREATE TABLE spec (
-     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-     name VARCHAR(64) NOT NULL
- );
-
- -- 规格值表
- CREATE TABLE spec_value (
-     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-     spec_id BIGINT NOT NULL,
-     value VARCHAR(64) NOT NULL,
-     FOREIGN KEY (spec_id) REFERENCES spec(id)
- );
-
- -- SKU表
- CREATE TABLE sku (
-     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-     goods_id BIGINT NOT NULL,
-     price INT NOT NULL,
-     cover VARCHAR(255),
-     sold INT NOT NULL DEFAULT 0,
-     stock INT NOT NULL DEFAULT 0,
-     status TINYINT NOT NULL DEFAULT 1,
-     spec_value_ids VARCHAR(128) NOT NULL, -- 逗号分隔的规格值ID
-     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-     FOREIGN KEY (goods_id) REFERENCES goods(id)
- );
- -- 商品评论表
- CREATE TABLE goods_comment (
-     id BIGINT PRIMARY KEY AUTO_INCREMENT,
-     goods_id BIGINT NOT NULL,
-     user_id BIGINT NOT NULL,
-     score TINYINT NOT NULL, -- 评分（如1-5分）
-     content TEXT,           -- 评论内容
-     imgs VARCHAR(1024),      -- 图片（逗号分隔的图片URL）
-     status TINYINT NOT NULL DEFAULT 1, -- 状态（如1-正常，0-删除）
-     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-     FOREIGN KEY (goods_id) REFERENCES goods(id)
- );
+ * <p>
+ * -- 商品SPU表
+ * CREATE TABLE goods (
+ * id BIGINT PRIMARY KEY AUTO_INCREMENT,
+ * name VARCHAR(128) NOT NULL,
+ * cover VARCHAR(255),
+ * description TEXT,
+ * category_id BIGINT,
+ * status TINYINT NOT NULL DEFAULT 1,
+ * created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+ * updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+ * );
+ * <p>
+ * -- 规格表
+ * CREATE TABLE spec (
+ * id BIGINT PRIMARY KEY AUTO_INCREMENT,
+ * name VARCHAR(64) NOT NULL
+ * );
+ * <p>
+ * -- 规格值表
+ * CREATE TABLE spec_value (
+ * id BIGINT PRIMARY KEY AUTO_INCREMENT,
+ * spec_id BIGINT NOT NULL,
+ * value VARCHAR(64) NOT NULL,
+ * FOREIGN KEY (spec_id) REFERENCES spec(id)
+ * );
+ * <p>
+ * -- SKU表
+ * CREATE TABLE sku (
+ * id BIGINT PRIMARY KEY AUTO_INCREMENT,
+ * goods_id BIGINT NOT NULL,
+ * price INT NOT NULL,
+ * cover VARCHAR(255),
+ * sold INT NOT NULL DEFAULT 0,
+ * stock INT NOT NULL DEFAULT 0,
+ * status TINYINT NOT NULL DEFAULT 1,
+ * spec_value_ids VARCHAR(128) NOT NULL, -- 逗号分隔的规格值ID
+ * created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+ * updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ * FOREIGN KEY (goods_id) REFERENCES goods(id)
+ * );
+ * -- 商品评论表
+ * CREATE TABLE goods_comment (
+ * id BIGINT PRIMARY KEY AUTO_INCREMENT,
+ * goods_id BIGINT NOT NULL,
+ * user_id BIGINT NOT NULL,
+ * score TINYINT NOT NULL, -- 评分（如1-5分）
+ * content TEXT,           -- 评论内容
+ * imgs VARCHAR(1024),      -- 图片（逗号分隔的图片URL）
+ * status TINYINT NOT NULL DEFAULT 1, -- 状态（如1-正常，0-删除）
+ * created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+ * FOREIGN KEY (goods_id) REFERENCES goods(id)
+ * );
  */
 
 @RestController
@@ -107,11 +107,11 @@ public class GoodsController {
      */
     @RequestMapping(value = "search", method = RequestMethod.GET)
     public ResultBody search(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                                @RequestParam(value = "size", defaultValue = "10", required = false) Integer size,
-                                @RequestParam(required = false) String name,
-                                @RequestParam(required = false) Long categoryId,
-                                @RequestParam(required = false) Double minPrice,
-                                @RequestParam(required = false) Double maxPrice) throws Exception {
+                             @RequestParam(value = "size", defaultValue = "10", required = false) Integer size,
+                             @RequestParam(required = false) String name,
+                             @RequestParam(required = false) Long categoryId,
+                             @RequestParam(required = false) Double minPrice,
+                             @RequestParam(required = false) Double maxPrice) throws Exception {
         return ResultBody.success(0);
     }
 
