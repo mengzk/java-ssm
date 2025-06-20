@@ -10,7 +10,7 @@ import java.util.List;
  * Date: 2024-07-23
  * Desc:
  */
-public interface GoodsSkuMapper {
+public interface GoodsSpecValMapper {
 
     List<String> onQuery(@Param("id") int id);
 

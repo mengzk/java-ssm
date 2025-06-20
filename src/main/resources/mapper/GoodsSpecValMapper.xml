@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.item.study.mapper.GoodsSkuMapper">
+<mapper namespace="com.item.study.mapper.GoodsSpecValMapper">
 
     <!-- 配置 查询结果的列明和实体类的属性名的对应关系; -->
     <resultMap id="roomMap" type="com.item.study.model.entity.GoodsEntity">
@@ -15,7 +15,7 @@
     </resultMap>
 
     <!--  缓存配置  -->
-<!--    <cache eviction="LRU" flushInterval="60000" size="512"/>-->
+    <!--    <cache/>-->
 
     <insert id="onInsert">
         INSERT INTO s_goods (name, cover, description)
@@ -45,4 +45,5 @@
             </if>
         </where>
     </select>
+
 </mapper>
