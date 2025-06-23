@@ -85,16 +85,7 @@ public class GoodsController {
     }
 
     /**
-     * 新建商品
-     */
-    @RequestMapping(value = "addSku", method = RequestMethod.POST)
-    public ResultBody addSku(@RequestBody() GoodsBody body, @RequestHeader("token") String token) throws Exception {
-//        body.uid = TokenUtils.getUserId(token);
-        return ResultBody.success(service.create(body));
-    }
-
-    /**
-     * 查询商品详情
+     * 商品详情
      */
     @RequestMapping(value = "detail", method = RequestMethod.GET)
     public ResultBody detail(@RequestParam("id") Integer id) throws Exception {
@@ -116,7 +107,7 @@ public class GoodsController {
     }
 
     /**
-     * 查询
+     * 查询数量
      */
     @RequestMapping(value = "count", method = RequestMethod.GET)
     public ResultBody count(@RequestParam(value = "tag", defaultValue = "0", required = false) Integer tag,
@@ -125,7 +116,7 @@ public class GoodsController {
     }
 
     /**
-     * 更新预约
+     * 更新
      */
     @RequestMapping(value = "update", method = RequestMethod.PUT)
     public ResultBody update(@RequestBody() String body) throws Exception {
@@ -133,10 +124,109 @@ public class GoodsController {
     }
 
     /**
-     * 删除预约
+     * 删除
      */
     @RequestMapping(value = "delete", method = RequestMethod.DELETE)
     public ResultBody delete(@RequestParam("id") Integer id) throws Exception {
         return ResultBody.success(0);
     }
+
+    /**
+     * 新建商品SKU
+     */
+    @RequestMapping(value = "addSku", method = RequestMethod.POST)
+    public ResultBody addSku(@RequestBody() GoodsBody body, @RequestHeader("token") String token) throws Exception {
+//        body.uid = TokenUtils.getUserId(token);
+        return ResultBody.success(service.create(body));
+    }
+
+    /**
+     * 删除商品SKU
+     */
+    @RequestMapping(value = "deleteSku", method = RequestMethod.DELETE)
+    public ResultBody deleteSku(@RequestParam("id") Integer id) throws Exception {
+        return ResultBody.success(service.deleteSku(id));
+    }
+
+    /**
+     * 更新商品SKU
+     */
+    @RequestMapping(value = "updateSku", method = RequestMethod.PUT)
+    public ResultBody updateSku(@RequestBody() GoodsBody body) throws Exception {
+        return ResultBody.success(service.updateSku(body));
+    }
+
+    /**
+     * 查询商品SKU
+     */
+    @RequestMapping(value = "querySku", method = RequestMethod.GET)
+    public ResultBody querySku(@RequestParam("id") Integer id) throws Exception {
+        return ResultBody.success(service.querySku(id));
+    }
+
+    /**
+     * 添加商品规格
+     */
+    @RequestMapping(value = "addSpec", method = RequestMethod.POST)
+    public ResultBody addSpec(@RequestParam("id") Integer id, @RequestBody() String specs) throws Exception {
+        return ResultBody.success(service.addSpec(id, null));
+    }
+
+    /**
+     * 删除商品规格
+     */
+    @RequestMapping(value = "deleteSpec", method = RequestMethod.DELETE)
+    public ResultBody deleteSpec(@RequestParam("id") Integer id) throws Exception {
+        return ResultBody.success(service.deleteSpec(id));
+    }
+
+    /**
+     * 更新商品规格
+     */
+    @RequestMapping(value = "updateSpec", method = RequestMethod.PUT)
+    public ResultBody updateSpec(@RequestBody() String body) throws Exception {
+        return ResultBody.success(service.updateSpec(0, body));
+    }
+
+    /**
+     * 查询商品规格
+     */
+    @RequestMapping(value = "querySpec", method = RequestMethod.GET)
+    public ResultBody querySpec(@RequestParam("id") Integer id) throws Exception {
+        return ResultBody.success(service.querySpec(id));
+    }
+
+    /**
+     * 查询商品规格值
+     */
+
+    @RequestMapping(value = "querySpecValue", method = RequestMethod.GET)
+    public ResultBody querySpecValue(@RequestParam("id") Integer id) throws Exception {
+        return ResultBody.success(service.querySpecValue(id));
+    }
+
+    /**
+     * 添加商品规格值
+     */
+    @RequestMapping(value = "addSpecValue", method = RequestMethod.POST)
+    public ResultBody addSpecValue(@RequestParam("id") Integer id, @RequestBody() String value) throws Exception {
+        return ResultBody.success(service.addSpecValue(id, null));
+    }
+
+    /**
+     * 删除商品规格值
+     */
+    @RequestMapping(value = "deleteSpecValue", method = RequestMethod.DELETE)
+    public ResultBody deleteSpecValue(@RequestParam("id") Integer id) throws Exception {
+        return ResultBody.success(service.deleteSpecValue(id));
+    }
+
+    /**
+     * 更新商品规格值
+     */
+    @RequestMapping(value = "updateSpecValue", method = RequestMethod.PUT)
+    public ResultBody updateSpecValue(@RequestBody() String body) throws Exception {
+        return ResultBody.success(service.updateSpecValue(0, body));
+    }
+
 }

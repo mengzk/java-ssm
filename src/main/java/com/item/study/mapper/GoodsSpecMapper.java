@@ -12,11 +12,11 @@ import java.util.List;
  */
 public interface GoodsSpecMapper {
 
-    List<String> onQuery(@Param("id") int id);
+    List<String> onQuery(@Param("goodsId") int id);
 
-    int onInsert(@Param("body") Object body);
+    int onInsert(@Param("name") String name, @Param("goodsId") int goodsId);
 
-    int onUpdate(@Param("body") Object body);
+    int onUpdate(@Param("id") Integer id, @Param("name") String name);
 
-    int onDelete(@Param("id") int userId);
+    int onDelete(@Param("id") int id);
 }

@@ -1,6 +1,5 @@
 package com.item.study.model.body;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -8,15 +7,16 @@ import java.util.List;
  * Date: 2024-08-17
  * Desc:
  */
-public class GoodsBody {
+public class GoodsSkuBody {
     public Integer id;
-    public String name;
+    public String value;
+    public int price;
+    public int stock;
+    public int sold;
     public int status;
     public String cover;
     public String description;
-    public List<GoodsSkuBody> skus;
     public List<GoodsSpecBody> specs;
-
 
 }
 

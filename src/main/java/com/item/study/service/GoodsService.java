@@ -1,7 +1,9 @@
 package com.item.study.service;
 
 import com.item.study.mapper.GoodsMapper;
+import com.item.study.mapper.GoodsSpecMapper;
 import com.item.study.model.body.GoodsBody;
+import com.item.study.model.entity.GoodsSpecValEntity;
 import com.item.study.model.result.ResultList;
 import com.item.study.modules.exception.AppException;
 import com.item.study.modules.exception.CommonError;
@@ -21,6 +23,10 @@ import java.util.List;
 public class GoodsService {
     @Autowired
     private GoodsMapper mapper;
+    @Autowired
+    GoodsSpecMapper specMapper;
+    @Autowired
+    GoodsSpecValEntity specValEntity;
 
     //
     public int create(GoodsBody body) throws AppException {
@@ -68,7 +74,7 @@ public class GoodsService {
 
 
     // 添加商品SKU
-    public int addSku(GoodsBody body) throws AppException {
+    public int addSku(Integer goodsId, GoodsBody body) throws AppException {
         if(body == null || body.skus == null || body.skus.isEmpty()) {
             throw CustomException.create(CommonError.PARAM_EMPTY);
         }
@@ -97,28 +103,28 @@ public class GoodsService {
         return 0;
     }
 
-    // 查询商品
-    public int addSpec(GoodsBody body) throws AppException {
-        if(body == null || body.specs == null || body.specs.isEmpty()) {
+    //
+    public int addSpec(Integer id, List<String> specs) throws AppException {
+        if(id == null || specs == null) {
             throw CustomException.create(CommonError.PARAM_EMPTY);
         }
         return 0;
     }
-
+    //
     public int deleteSpec(Integer id) throws AppException {
         if(id == null) {
             throw CustomException.create(CommonError.PARAM_EMPTY);
         }
         return 0;
     }
-
-    public int updateSpec(GoodsBody body) throws AppException {
-        if(body == null || body.specs == null || body.specs.isEmpty()) {
+    //
+    public int updateSpec(Integer id, String name) throws AppException {
+        if(id == null || name == null || name.isEmpty()) {
             throw CustomException.create(CommonError.PARAM_EMPTY);
         }
         return 0;
     }
-
+    //
     public int querySpec(Integer id) throws AppException {
         if(id == null) {
             throw CustomException.create(CommonError.PARAM_EMPTY);
@@ -126,7 +132,7 @@ public class GoodsService {
         return 0;
     }
 
-    public ResultList<String> querySpecList(int size, int page) throws AppException {
+    public ResultList<String> querySpecList(Integer goodsId ,int size, int page) throws AppException {
         int start = (page - 1) * size;
         List<String> list = new ArrayList<>();
         return ResultList.create(list, 0, page, size);
@@ -146,15 +152,15 @@ public class GoodsService {
         return 0;
     }
 
-    public int updateSpecValue(GoodsBody body) throws AppException {
-        if(body == null || body.specs == null || body.specs.isEmpty()) {
+    public int updateSpecValue(Integer id, String value) throws AppException {
+        if(id == null || value == null || value.isEmpty()) {
             throw CustomException.create(CommonError.PARAM_EMPTY);
         }
         return 0;
     }
 
-    public int addSpecValue(GoodsBody body) throws AppException {
-        if(body == null || body.specs == null || body.specs.isEmpty()) {
+    public int addSpecValue(Integer specId, List<String> specVals) throws AppException {
+        if(specId == null || specVals == null) {
             throw CustomException.create(CommonError.PARAM_EMPTY);
         }
         return 0;

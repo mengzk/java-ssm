@@ -4,44 +4,37 @@
 <mapper namespace="com.item.study.mapper.GoodsSpecMapper">
 
     <!-- 配置 查询结果的列明和实体类的属性名的对应关系; -->
-    <resultMap id="roomMap" type="com.item.study.model.entity.GoodsEntity">
+    <resultMap id="roomMap" type="com.item.study.model.entity.GoodsSpecEntity">
         <id property="id" javaType="Integer" column="id"/>
         <result property="name" javaType="String" column="name"/>
-        <result property="cover" javaType="String" column="cover"/>
-        <result property="description" javaType="String" column="description"/>
-        <result property="status" javaType="Integer" column="status"/>
-        <result property="createdAt" javaType="Date" column="created_at"/>
-        <result property="updatedAt" javaType="Date" column="updated_at"/>
+        <result property="goodsId" javaType="Integer" column="goods_id"/>
     </resultMap>
 
     <!--  缓存配置  -->
-    <!--    <cache/>-->
+    <!--   <cache eviction="LRU" flushInterval="60000" size="512"/>  -->
 
     <insert id="onInsert">
-        INSERT INTO s_goods (name, cover, description)
-        VALUES (#{body.name},#{body.cover},#{body.description});
+        INSERT INTO s_goods_spec (name, goods_id)
+        VALUES (#{name}, #{goodsId});
     </insert>
 
     <update id="onUpdate">
-        UPDATE s_goods
+        UPDATE s_goods_spec
         <set>
-            value=#{value}
+            name=#{name}
         </set>
         WHERE id=#{id};
     </update>
 
     <delete id="onDelete">
-        DELETE FROM s_goods WHERE id=#{id};
+        DELETE FROM s_goods_spec WHERE id=#{id};
     </delete>
 
     <select id="onQuery" resultMap="roomMap">
-        SELECT * FROM s_goods
+        SELECT * FROM s_goods_spec
         <where>
             <if test="status != null">
-                status = #{status}
-            </if>
-            <if test="category != null">
-                AND category_id = #{category}
+                goods_id = #{goodsId}
             </if>
         </where>
     </select>
