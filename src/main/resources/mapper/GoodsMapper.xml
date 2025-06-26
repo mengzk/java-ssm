@@ -28,9 +28,17 @@
     <update id="onUpdate">
         UPDATE s_goods
         <set>
-            value=#{value}
+            <if test="body.name != null and body.name != ''">
+                name = #{body.name},
+            </if>
+            <if test="body.cover != null and body.cover != ''">
+                cover = #{body.cover},
+            </if>
+            <if test="body.description != null and body.description != ''">
+                description = #{body.description},
+            </if>
         </set>
-        WHERE id=#{id};
+        WHERE id=#{body.id};
     </update>
 
     <delete id="onDelete">
@@ -59,7 +67,18 @@
     </select>
 
     <select id="onCount">
-        SELECT count(*) FROM s_goods where status=#{status};
+        SELECT count(*) FROM s_goods
+        <where>
+            <if test="status != null">
+                status = #{status}
+            </if>
+            <if test="category != null">
+                AND category_id = #{category}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND name LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+        </where>
     </select>
 
 </mapper>

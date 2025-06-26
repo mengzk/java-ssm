@@ -59,7 +59,7 @@ public class GoodsService {
     }
 
     //
-    public ResultList<GoodsEntity> search(int page, int size) throws AppException {
+    public ResultList<GoodsEntity> search(int page, int size, String keyword) throws AppException {
         int start = (page - 1) * size;
 
         // 数据查询
@@ -69,7 +69,7 @@ public class GoodsService {
         if (size > 100) {
             throw CustomException.create(CommonError.PARAM_FAIL);
         }
-        List<GoodsEntity> list = mapper.onQuery("", null, null, start, size);
+        List<GoodsEntity> list = mapper.onQuery(keyword, null, null, start, size);
 
         return ResultList.create(list, 0, page, size);
     }
@@ -87,10 +87,11 @@ public class GoodsService {
     }
 
     //
-    public int update(String body) throws AppException {
-//        if(body.id == null) {
-//            throw CustomException.create(CommonError.PARAM_EMPTY);
-//        }
+    public int update(GoodsBody body) throws AppException {
+        if(body.id == null) {
+            throw CustomException.create(CommonError.PARAM_EMPTY);
+        }
+        mapper.onUpdate(body);
         return 0;
     }
 

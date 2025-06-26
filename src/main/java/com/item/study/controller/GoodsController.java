@@ -99,11 +99,11 @@ public class GoodsController {
     @RequestMapping(value = "query", method = RequestMethod.GET)
     public ResultBody query(@RequestParam(value = "page", defaultValue = "1") Integer page,
                              @RequestParam(value = "size", defaultValue = "10", required = false) Integer size,
-                             @RequestParam(required = false) String name,
+                             @RequestParam(required = false) String keyword,
                              @RequestParam(required = false) Long categoryId,
                              @RequestParam(required = false) Double minPrice,
                              @RequestParam(required = false) Double maxPrice) throws Exception {
-        return ResultBody.success(service.search(page, size));
+        return ResultBody.success(service.search(page, size, keyword));
     }
 
     /**
@@ -119,8 +119,8 @@ public class GoodsController {
      * 更新
      */
     @RequestMapping(value = "update", method = RequestMethod.PUT)
-    public ResultBody update(@RequestBody() String body) throws Exception {
-        return ResultBody.success(0);
+    public ResultBody update(@RequestBody() GoodsBody body) throws Exception {
+        return ResultBody.success(service.update(body));
     }
 
     /**
