@@ -2,12 +2,15 @@ package com.item.study.service;
 
 import com.item.study.mapper.GoodsMapper;
 import com.item.study.mapper.GoodsSpecMapper;
+import com.item.study.mapper.GoodsSpecValMapper;
 import com.item.study.model.body.GoodsBody;
+import com.item.study.model.entity.GoodsEntity;
 import com.item.study.model.entity.GoodsSpecValEntity;
 import com.item.study.model.result.ResultList;
 import com.item.study.modules.exception.AppException;
 import com.item.study.modules.exception.CommonError;
 import com.item.study.modules.exception.CustomException;
+import com.item.study.utils.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,15 +29,25 @@ public class GoodsService {
     @Autowired
     GoodsSpecMapper specMapper;
     @Autowired
-    GoodsSpecValEntity specValEntity;
+    GoodsSpecValMapper specValMapper;
 
     //
     public int create(GoodsBody body) throws AppException {
-        if(body == null || body.name == null || body.name.isEmpty()) {
+        if(body == null || TextUtils.isEmpty(body.name)) {
             throw CustomException.create(CommonError.PARAM_EMPTY);
         }
 
-        return 0;
+        // 第一步：验证商品名称是否已存在
+        // 第二步：插入商品信息
+        int goodsId = mapper.onInsert(body);
+
+        // 第三步：插入商品规格
+        // 第四步：插入商品SKU
+        // 第五步：插入商品规格值
+        // 第六步：返回商品ID
+        // 这里假设插入成功，返回商品ID
+
+        return goodsId;
     }
 
     //
@@ -46,9 +59,18 @@ public class GoodsService {
     }
 
     //
-    public ResultList<String> search(int size, int page) throws AppException {
+    public ResultList<GoodsEntity> search(int page, int size) throws AppException {
         int start = (page - 1) * size;
-        List<String> list = new ArrayList<>();
+
+        // 数据查询
+        if (size <= 0 || page <= 0) {
+            throw CustomException.create(CommonError.PARAM_EMPTY);
+        }
+        if (size > 100) {
+            throw CustomException.create(CommonError.PARAM_FAIL);
+        }
+        List<GoodsEntity> list = mapper.onQuery("", null, null, start, size);
+
         return ResultList.create(list, 0, page, size);
     }
 

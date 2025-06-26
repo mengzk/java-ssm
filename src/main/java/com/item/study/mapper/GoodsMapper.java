@@ -1,5 +1,7 @@
 package com.item.study.mapper;
 
+import com.item.study.model.body.GoodsBody;
+import com.item.study.model.entity.GoodsEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,15 +14,19 @@ import java.util.List;
  */
 public interface GoodsMapper {
 
-    List<String> onQuery(@Param("id") int id);
+    List<GoodsEntity> onQuery(@Param("keyword") String key,
+                              @Param("status") Integer status,
+                              @Param("category") Integer category,
+                              @Param("start") int start,
+                              @Param("size") int size);
 
-    String onDetail(@Param("id") int userId);
+    String onDetail(@Param("id") int id);
 
-    int onInsert(@Param("body") Object body);
+    int onInsert(@Param("body") GoodsBody body);
 
-    int onUpdate(@Param("body") Object body);
+    int onUpdate(@Param("body") GoodsBody body);
 
-    int onDelete(@Param("id") int userId);
+    int onDelete(@Param("id") int id);
 
-    int onCount();
+    int onCount(@Param("status") Integer status);
 }

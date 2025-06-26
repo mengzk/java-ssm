@@ -14,12 +14,12 @@
     <!--   <cache eviction="LRU" flushInterval="60000" size="512"/>  -->
 
     <insert id="onInsert">
-        INSERT INTO s_goods_spec_val (value, spec_id)
+        INSERT INTO s_goods_spec_value (value, spec_id)
         VALUES (#{value}, #{specId});
     </insert>
 
     <update id="onUpdate">
-        UPDATE s_goods_spec_val
+        UPDATE s_goods_spec_value
         <set>
             value=#{value}
         </set>
@@ -27,11 +27,11 @@
     </update>
 
     <delete id="onDelete">
-        DELETE FROM s_goods_spec_val WHERE id=#{id};
+        DELETE FROM s_goods_spec_value WHERE id=#{id};
     </delete>
 
     <select id="onQuery" resultMap="roomMap">
-        SELECT * FROM s_goods_spec_val
+        SELECT * FROM s_goods_spec_value
         <where>
             <if test="status != null">
                 spec_id = #{specId}

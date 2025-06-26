@@ -26,7 +26,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
  */
 public class ChatSseEmitter {
 
-    private SseEmitter emitter;
+    private final SseEmitter emitter;
 
     public ChatSseEmitter() {
         emitter = new SseEmitter(10000L);

@@ -96,14 +96,14 @@ public class GoodsController {
     /**
      * 查询商品
      */
-    @RequestMapping(value = "search", method = RequestMethod.GET)
-    public ResultBody search(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    @RequestMapping(value = "query", method = RequestMethod.GET)
+    public ResultBody query(@RequestParam(value = "page", defaultValue = "1") Integer page,
                              @RequestParam(value = "size", defaultValue = "10", required = false) Integer size,
                              @RequestParam(required = false) String name,
                              @RequestParam(required = false) Long categoryId,
                              @RequestParam(required = false) Double minPrice,
                              @RequestParam(required = false) Double maxPrice) throws Exception {
-        return ResultBody.success(0);
+        return ResultBody.success(service.search(page, size));
     }
 
     /**

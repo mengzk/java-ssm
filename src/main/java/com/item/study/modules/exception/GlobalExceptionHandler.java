@@ -3,6 +3,7 @@ package com.item.study.modules.exception;
 import com.item.study.model.result.ResultBody;
 import jakarta.el.MethodNotFoundException;
 import org.springframework.beans.MethodInvocationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.validation.BindException;
@@ -115,6 +116,9 @@ public class GlobalExceptionHandler {
         } else if (e instanceof BadSqlGrammarException) {
             System.out.println("---> BadSqlGrammarException");
             msg = "SQL语法错误，请检查参数或SQL语句";
+        } else if (e instanceof DataIntegrityViolationException) {
+            System.out.println("---> BadSqlGrammarException");
+            msg = "SQL插入错误，请检查参数";
         }
         return ResultBody.unknown(msg == null ? CommonError.UNKNOWN_ERR.getCEMsg() : msg);
     }

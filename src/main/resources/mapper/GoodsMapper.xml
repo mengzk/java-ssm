@@ -20,6 +20,9 @@
     <insert id="onInsert">
         INSERT INTO s_goods (name, cover, description)
         VALUES (#{body.name},#{body.cover},#{body.description});
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
     </insert>
 
     <update id="onUpdate">
@@ -43,12 +46,12 @@
             <if test="category != null">
                 AND category_id = #{category}
             </if>
-            <if test="name != null and name != ''">
-                AND name LIKE CONCAT('%', #{name}, '%')
+            <if test="keyword != null and keyword != ''">
+                AND name LIKE CONCAT('%', #{keyword}, '%')
             </if>
         </where>
         ORDER BY created_at DESC
-        LIMIT #{page}, #{size};
+        LIMIT #{start}, #{size};
     </select>
 
     <select id="onDetail" resultMap="roomMap">

@@ -18,11 +18,11 @@ import java.util.UUID;
  */
 
 public class JwtToken {
-    private static long GAP = 24 * 60 * 60 * 1000; // token过期时间 1天
-    private static String SECRET_KEY = "QXKALHZJDCOPVNMS"; // 16位 -每隔1周更换一次
-    private static String ISSUER = "ItemStudy"; // 发行人
-    private static String AUDIENCE = "ItemStudyUser"; // 受众
-    private static String TOKEN_PREFIX = "Bearer ";
+    private static final long GAP = 24 * 60 * 60 * 1000; // token过期时间 1天
+    private static final String SECRET_KEY = "QXKALHZJDCOPVNMS"; // 16位 -每隔1周更换一次
+    private static final String ISSUER = "ItemStudy"; // 发行人
+    private static final String AUDIENCE = "ItemStudyUser"; // 受众
+    private static final String TOKEN_PREFIX = "Bearer ";
     private static Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
 
     /**
