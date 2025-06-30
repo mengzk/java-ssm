@@ -18,6 +18,14 @@
         VALUES (#{value}, #{specId});
     </insert>
 
+    <insert id="onInserts">
+        INSERT INTO s_goods_spec_value (value, spec_id)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.value}, #{specId})
+        </foreach>
+    </insert>
+
     <update id="onUpdate">
         UPDATE s_goods_spec_value
         <set>

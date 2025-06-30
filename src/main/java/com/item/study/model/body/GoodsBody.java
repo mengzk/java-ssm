@@ -14,8 +14,6 @@ public class GoodsBody {
     public String cover;
     public String description;
     public List<GoodsSkuBody> skus;
-    public List<GoodsSpecBody> specs;
-
 
     @Override
     public String toString() {

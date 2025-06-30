@@ -1,5 +1,6 @@
 package com.item.study.mapper;
 
+import com.item.study.model.body.GoodsSkuBody;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -12,11 +13,11 @@ import java.util.List;
  */
 public interface GoodsSkuMapper {
 
-    List<String> onQuery(@Param("id") int id);
+    List<GoodsSkuBody> onQuery(@Param("id") int id);
 
-    int onInsert(@Param("body") Object body);
+    int onInsert(@Param("body") GoodsSkuBody body);
 
-    int onUpdate(@Param("body") Object body);
+    int onUpdate(@Param("body") GoodsSkuBody body);
 
     int onDelete(@Param("id") int userId);
 }

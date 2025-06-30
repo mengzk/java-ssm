@@ -4,7 +4,7 @@
 <mapper namespace="com.item.study.mapper.GoodsSpecMapper">
 
     <!-- 配置 查询结果的列明和实体类的属性名的对应关系; -->
-    <resultMap id="roomMap" type="com.item.study.model.entity.GoodsSpecEntity">
+    <resultMap id="specMap" type="com.item.study.model.entity.GoodsSpecEntity">
         <id property="id" javaType="Integer" column="id"/>
         <result property="name" javaType="String" column="name"/>
         <result property="goodsId" javaType="Integer" column="goods_id"/>
@@ -13,9 +13,12 @@
     <!--  缓存配置  -->
     <!--   <cache eviction="LRU" flushInterval="60000" size="512"/>  -->
 
-    <insert id="onInsert">
+    <insert id="onInsert" parameterType="com.item.study.model.body.GoodsSpecBody" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO s_goods_spec (name, goods_id)
-        VALUES (#{name}, #{goodsId});
+        VALUES (#{body.name}, #{goodsId});
+        <selectKey resultType="int" order="AFTER" keyProperty="body.id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
 
     <update id="onUpdate">
@@ -30,7 +33,7 @@
         DELETE FROM s_goods_spec WHERE id=#{id};
     </delete>
 
-    <select id="onQuery" resultMap="roomMap">
+    <select id="onQuery" resultMap="specMap">
         SELECT * FROM s_goods_spec
         <where>
             <if test="status != null">

@@ -10,13 +10,14 @@ import java.util.List;
 public class GoodsSkuBody {
     public Integer id;
     public Integer goodsId;
-    public String value;
+    public String name;
     public int price;
     public int stock;
     public int sold;
     public int status;
     public String cover;
     public String description;
+    public String specIds;
     public List<GoodsSpecBody> specs;
 
 }

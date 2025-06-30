@@ -4,11 +4,16 @@
 <mapper namespace="com.item.study.mapper.GoodsSkuMapper">
 
     <!-- 配置 查询结果的列明和实体类的属性名的对应关系; -->
-    <resultMap id="roomMap" type="com.item.study.model.entity.GoodsEntity">
+    <resultMap id="skuMap" type="com.item.study.model.entity.GoodsSkuEntity">
         <id property="id" javaType="Integer" column="id"/>
+        <id property="goodsId" javaType="Integer" column="goods_id"/>
         <result property="name" javaType="String" column="name"/>
         <result property="cover" javaType="String" column="cover"/>
         <result property="description" javaType="String" column="description"/>
+        <result property="specIds" javaType="String" column="spec_ids"/>
+        <result property="price" javaType="Integer" column="price"/>
+        <result property="stock" javaType="Integer" column="stock"/>
+        <result property="sold" javaType="Integer" column="sold"/>
         <result property="status" javaType="Integer" column="status"/>
         <result property="createdAt" javaType="Date" column="created_at"/>
         <result property="updatedAt" javaType="Date" column="updated_at"/>
@@ -18,24 +23,24 @@
 <!--    <cache eviction="LRU" flushInterval="60000" size="512"/>-->
 
     <insert id="onInsert">
-        INSERT INTO s_goods (name, cover, description)
-        VALUES (#{body.name},#{body.cover},#{body.description});
+        INSERT INTO s_goods_sku (goods_id, name, cover, price, stock, spec_ids, status)
+        VALUES (#{body.goodsId},#{body.name},#{body.cover},#{body.price},#{body.stock},#{body.specIds}, 1);
     </insert>
 
     <update id="onUpdate">
-        UPDATE s_goods
+        UPDATE s_goods_sku
         <set>
-            value=#{value}
+            value=#{body.value}
         </set>
-        WHERE id=#{id};
+        WHERE id=#{body.id};
     </update>
 
     <delete id="onDelete">
-        DELETE FROM s_goods WHERE id=#{id};
+        DELETE FROM s_goods_sku WHERE id=#{id};
     </delete>
 
-    <select id="onQuery" resultMap="roomMap">
-        SELECT * FROM s_goods
+    <select id="onQuery" resultMap="skuMap">
+        SELECT * FROM s_goods_sku
         <where>
             <if test="status != null">
                 status = #{status}
