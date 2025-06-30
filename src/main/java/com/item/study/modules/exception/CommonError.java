@@ -18,6 +18,7 @@ public enum CommonError implements CustomError {
 
     DB_ERROR(10300, "数据库操作失败"),
     DB_SQL_ERROR(10400, "SQL语法错误"),
+    DB_INSERT_FAIL(10410, "数据插入失败"),
 
     LOGIN_ERR(20100, "账号登录失败"),
     ACCOUNT_PWD_ERR(20110, "账号或密码错误"),

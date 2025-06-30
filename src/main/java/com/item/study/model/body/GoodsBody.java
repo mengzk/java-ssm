@@ -1,6 +1,5 @@
 package com.item.study.model.body;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +20,8 @@ public class GoodsBody {
     @Override
     public String toString() {
         return "GoodsBody{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", status=" + status +
                 ", cover='" + cover + '\'' +
                 ", description='" + description + '\'' +

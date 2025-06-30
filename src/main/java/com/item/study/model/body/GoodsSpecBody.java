@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class GoodsSpecBody {
     public Integer id;
+    public Integer goodsId;
     public String name;
     public List<GoodsSpecValBody> values;
 }

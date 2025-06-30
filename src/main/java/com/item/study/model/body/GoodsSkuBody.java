@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class GoodsSkuBody {
     public Integer id;
+    public Integer goodsId;
     public String value;
     public int price;
     public int stock;

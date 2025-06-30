@@ -36,18 +36,20 @@ public class GoodsService {
         if(body == null || TextUtils.isEmpty(body.name)) {
             throw CustomException.create(CommonError.PARAM_EMPTY);
         }
-
         // 第一步：验证商品名称是否已存在
         // 第二步：插入商品信息
-        int goodsId = mapper.onInsert(body);
-
+        int row = mapper.onInsert(body);
+        if (row < 1) {
+            throw CustomException.create(CommonError.DB_INSERT_FAIL);
+        }
         // 第三步：插入商品规格
+
         // 第四步：插入商品SKU
         // 第五步：插入商品规格值
         // 第六步：返回商品ID
         // 这里假设插入成功，返回商品ID
 
-        return goodsId;
+        return body.id;
     }
 
     //

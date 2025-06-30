@@ -7,6 +7,7 @@ package com.item.study.model.body;
  */
 public class GoodsSpecValBody {
     public Integer id;
+    public Integer specId;
     public String value;
 }
 

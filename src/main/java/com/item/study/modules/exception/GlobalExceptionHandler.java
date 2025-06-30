@@ -113,6 +113,9 @@ public class GlobalExceptionHandler {
             System.out.println("---> MethodInvocationException");
         } else if (e instanceof HttpMessageConversionException) {
             System.out.println("---> HttpMessageConversionException");
+        } else if (e instanceof NullPointerException) {
+            System.out.println("---> NullPointerException");
+            msg = "空指针异常，请检查您的输入或数据。";
         } else if (e instanceof BadSqlGrammarException) {
             System.out.println("---> BadSqlGrammarException");
             msg = "SQL语法错误，请检查参数或SQL语句";

@@ -4,7 +4,7 @@
 <mapper namespace="com.item.study.mapper.GoodsMapper">
 
     <!-- 配置 查询结果的列明和实体类的属性名的对应关系; -->
-    <resultMap id="roomMap" type="com.item.study.model.entity.GoodsEntity">
+    <resultMap id="goodsMap" type="com.item.study.model.entity.GoodsEntity">
         <id property="id" javaType="Integer" column="id"/>
         <result property="name" javaType="String" column="name"/>
         <result property="cover" javaType="String" column="cover"/>
@@ -17,11 +17,11 @@
     <!--  缓存配置  -->
     <!--    <cache/>-->
 
-    <insert id="onInsert">
+    <insert id="onInsert" useGeneratedKeys="true" parameterType="com.item.study.model.body.GoodsBody" keyProperty="id">
         INSERT INTO s_goods (name, cover, description)
-        VALUES (#{body.name},#{body.cover},#{body.description});
-        <selectKey keyProperty="id" resultType="int" order="AFTER">
-            SELECT LAST_INSERT_ID();
+        VALUES (#{body.name},#{body.cover},#{body.description})
+        <selectKey resultType="int" order="AFTER" keyProperty="body.id">
+            SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
 
@@ -45,7 +45,7 @@
         DELETE FROM s_goods WHERE id=#{id};
     </delete>
 
-    <select id="onQuery" resultMap="roomMap">
+    <select id="onQuery" resultMap="goodsMap">
         SELECT * FROM s_goods
         <where>
             <if test="status != null">
@@ -62,7 +62,7 @@
         LIMIT #{start}, #{size};
     </select>
 
-    <select id="onDetail" resultMap="roomMap">
+    <select id="onDetail" resultMap="goodsMap">
         SELECT * FROM s_goods where id=#{id};
     </select>
 

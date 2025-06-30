@@ -23,6 +23,32 @@
 <!--    size：缓存大小。-->
 <!--    readOnly：是否只读。-->
 
+
+    <insert id="onInsert" parameterType=""com.item.study.model.body.GoodsBody" keyProperty="id">
+        <!--
+            将insert插入的数据的主键返回到 GoodsBody 对象中;
+              select LAST_INSERT_ID():得到刚刚添加进去记录的主键值，必须自增主键;
+            parameterType: 是实体类对象，不是数据类型
+            selectKey: 会将 SELECT LAST_INSERT_ID()的结果放入到传入的model的主键里面，
+            keyProperty: 对应的model中的主键的属性名，这里是 GoodsBody 中的 goodsId，因为它跟数据库的主键对应
+            order: AFTER 表示 SELECT LAST_INSERT_ID() 在insert执行之后执行,多用与自增主键，
+                相对于insert语句 BEFORE 表示 SELECT LAST_INSERT_ID() 在insert执行之前执行，这种是拿不到主键，这适合主键不是自增的类型
+            resultType: 主键数据类型
+
+            -mapper 类 中对应的方法签名
+            public int onInsert(@Param("body") GoodsBody body);
+
+            -service 类
+            int row = mapper.onInsert(body); // row 1表示插入成功，0表示插入失败
+            body.id; // 这里的 body.id 就是刚刚插入的主键值
+        -->
+        INSERT INTO s_goods (name, cover, description) VALUES (#{body.name},#{body.cover},#{body.description})
+        <selectKey keyProperty="body.id" order="AFTER" resultType="int">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+
     <insert id="insert">
         INSERT INTO test (userId, value) VALUES (#{id},#{value});
     </insert>
