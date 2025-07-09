@@ -90,7 +90,7 @@ public class GoodsController {
     @RequestMapping(value = "detail", method = RequestMethod.GET)
     public ResultBody detail(@RequestParam("id") Integer id) throws Exception {
         // 假设查询商品详情的逻辑
-        return ResultBody.success(0);
+        return ResultBody.success(service.detail(id));
     }
 
     /**
@@ -112,7 +112,7 @@ public class GoodsController {
     @RequestMapping(value = "count", method = RequestMethod.GET)
     public ResultBody count(@RequestParam(value = "tag", defaultValue = "0", required = false) Integer tag,
                             @RequestParam(value = "status", defaultValue = "0", required = false) Integer status) throws Exception {
-        return ResultBody.success(0);
+        return ResultBody.success(service.count());
     }
 
     /**
@@ -128,7 +128,7 @@ public class GoodsController {
      */
     @RequestMapping(value = "delete", method = RequestMethod.DELETE)
     public ResultBody delete(@RequestParam("id") Integer id) throws Exception {
-        return ResultBody.success(0);
+        return ResultBody.success(service.delete(id));
     }
 
     /**
